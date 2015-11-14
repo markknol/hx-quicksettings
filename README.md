@@ -8,7 +8,7 @@
 
 ## Usage in Haxe
 
-Download and add the .js and .css files in your HTML file.
+Download and add the .[js](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings.js) and .[css](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings.css) files in your HTML file.
 ```html
 <link rel="stylesheet" type="text/css" href="quicksettings.css">
 <script type="text/javascript" src="quicksettings.js"></script>
