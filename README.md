@@ -8,17 +8,22 @@
 
 ## Usage in Haxe
 
-Download and add the .[js](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings.js) and .[css](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings.css) files in your HTML file.
-```html
-<link rel="stylesheet" type="text/css" href="quicksettings.css">
-<script type="text/javascript" src="quicksettings.js"></script>
-```
-
-or
+Add CDN hosted javascript to your HTML file. It's included with the default [quicksettings.css](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings.min.css) so no need to add that.
 
 ```html
 <script type="text/javascript" src="https://cdn.jsdelivr.net/quicksettings/latest/quicksettings.min.js"></script>
 ```
+
+If you want to use a custom css download and add the .[js](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings.js) and one of the following [quicksettings_black.min.css](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings_black.min.css) / [quicksettings_tiny.min.css](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings_tiny.min.css) / [quicksettings_tiny_black.min.css](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings_tiny_black.min.css) / [quicksettings_tiny_white.min.css](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings_tiny_white.min.css) / [quicksettings_white.min.css](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings_white.min.css) files in your HTML file.
+
+
+
+```html
+<!-- for example: use the quicksettings_tiny_black.min.css -->
+<link rel="stylesheet" type="text/css" href="quicksettings_tiny_black.min.css">
+<script type="text/javascript" src="quicksettings.js"></script>
+```
+
 
 
 In Haxe/JavaScript you can use the panel like this:
@@ -28,7 +33,7 @@ import quicksettings.QuickSettings;
 var settings:QuickSettings = QuickSettings.create(20, 20, "Settings");
 ```
 
-check out the [example](example) folder for more.
+Check out the [example](example) folder for more information.
 
 **Enjoy!**
 
