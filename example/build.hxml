@@ -6,7 +6,7 @@
 -main Main
 
 # js target
--js bin/example_javascript.js
+-js bin/hxquicksettings.js
 
 # You can use -D source-map-content (requires Haxe 3.1+) to have the .hx
 # files directly embedded into the map file, this way you only have to
