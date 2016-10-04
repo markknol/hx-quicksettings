@@ -15,9 +15,29 @@ extern class QuickSettings {
   public function addRange<T:Float>(title:String, min:T, max:T, value:T, step:T, callback:T->Void):Void;
   
   /**
-   * creates a color input
+   * adds a date input. `date` must be formatted like "YYYY-MM-DD"
+   */
+  public function addDate(title:String, date:String, callback:String->Void):Void;
+  
+  /**
+   * adds a time input. `time` must be formatted like "HH-MM" or "HH:MM:SS" in 24-hour format.
+   */
+  public function addTime(title:String, time:String, callback:String->Void):Void;
+  
+  /**
+   * creates a number input
+   */
+  public function addNumber<T:Float>(title:String, min:T, max:T, value:T, step:T, callback:T->Void):Void;
+  
+  /**
+   * creates a color input. `color` can be "#f00", "#ff0000", "red", "rgb(255, 0, 0)", "rgba(255, 0, 0, 1)".
    */
   public function addColor(title:String, color:String, callback:String->Void):Void;
+  
+  /**
+   * adds a password text field
+   */
+  public function addPassword(title:String, text:String, callback:String->Void):Void;
   
   /**
    * creates a checkbox
@@ -60,6 +80,11 @@ extern class QuickSettings {
   public function addProgressBar<T:Float>(title:String, max:T, value:T, showNumbers:Bool):Void;
   
   /**
+   * adds a file chooser
+   */
+  public function addFileChooser(title:String, labelStr:String, filter:String, callback:Void->Void):Void;
+
+  /**
    * adds any arbitrary HTML element to the panel
    */
   public function addElement(title:String, htmlELement:HtmlElement):Void;
@@ -73,11 +98,18 @@ extern class QuickSettings {
   public function getBoolean(title:String):Bool;
   public function getColor(title:String):String;
   public function getText(title:String):String;
+  public function getDate(title:String):String;
   public function getInfo(title:String):String;
+  public function getFile(title:String):String;
   public function getDropDownValue<T>(title:String):T;
   public function getProgressValue<T:Float>(title:String):T;
+  public function getNumberValue<T:Float>(title:String):T;
   
+  public function setTime(title:String, file:String):String;
+  public function setDate(title:String, date:String):String;
   public function setRangeValue(title:String, value:Float):Void;
+  public function setRangeParameters<T:Float>(title:String, min:T, max:T, step:T):Void;
+  public function setNumberParameters<T:Float>(title:String, min:T, max:T, step:T):Void;
   public function setBoolean(title:String, value:Bool):Void;
   public function setColor(title:String, color:String):Void;
   public function setText(title:String, text:String):Void;
@@ -85,6 +117,7 @@ extern class QuickSettings {
   public function setDropDownIndex(title:String, index:Int):Void;
   public function setImageURL(title:String, imageURL:String):Void;
   public function setProgressValue<T:Float>(title:String, value:T):Void;
+  public function setNumberValue<T:Float>(title:String, value:T):Void;
   
   /**
    * Change the min, max or step of a range input.
@@ -185,5 +218,7 @@ extern class QuickSettings {
   public function bindColor(property:String, color:String, object:Dynamic):Void;
   public function bindBoolean(property:String, value:Bool, object:Dynamic):Void;
   public function bindText(property:String, text:String, object:Dynamic):Void;
+  public function bindDate(property:String, date:String, object:Dynamic):Void;
+  public function bindTime(property:String, time:String, object:Dynamic):Void;
   public function bindDropDown<T>(property:String, items:Array<T>, object:Dynamic):Void;
 }
