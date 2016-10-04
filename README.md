@@ -4,7 +4,7 @@
 
  > QuickSettings is a JavaScript library for making a quick settings panel to control code parameters.
 
-<img src="https://github.com/bit101/quicksettings/blob/master/images/chrome_pc.png" align=right width=190/>
+<img src="https://github.com/bit101/quicksettings/blob/master/images/master_demo.png" />
 
 ## Usage in Haxe
 
