@@ -65,7 +65,7 @@ var Main = function() {
 	this.panel5.addTextArea("file info","");
 	this.panel5.setTextAreaRows("file info",10);
 	this.panel5.addImage("image","");
-	QuickSettings.parse("{\n  \"title\": \"Live Parse Demo\",\n  \"x\": 490,\n  \"y\": 350,\n  \"draggable\": true,\n  \"collapsible\": true,\n  \"snapToGrid\": true,\n  \"gridSize\": 10,\n  \"controls\": [\n    {\n      \"type\": \"range\",\n      \"title\": \"range test\",\n      \"min\": 0,\n      \"max\": 100,\n      \"value\": 50,\n      \"step\": 1\n    },\n    {\n      \"type\": \"textarea\",\n      \"title\": \"text area test\",\n      \"value\": \"just some text\"\n    },\n    {\n      \"type\": \"boolean\",\n      \"title\": \"boolean test\",\n      \"value\": true\n    }\n  ]\n}");
+	QuickSettings.parse("{\n\t\"title\": \"Live Parse Demo\",\n\t\"x\": 490,\n\t\"y\": 350,\n\t\"draggable\": true,\n\t\"collapsible\": true,\n\t\"snapToGrid\": true,\n\t\"gridSize\": 10,\n\t\"controls\": [\n\t\t{\n\t\t\t\"type\": \"range\",\n\t\t\t\"title\": \"range test\",\n\t\t\t\"min\": 0,\n\t\t\t\"max\": 100,\n\t\t\t\"value\": 50,\n\t\t\t\"step\": 1\n\t\t},\n\t\t{\n\t\t\t\"type\": \"textarea\",\n\t\t\t\"title\": \"text area test\",\n\t\t\t\"value\": \"just some text\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"boolean\",\n\t\t\t\"title\": \"boolean test\",\n\t\t\t\"value\": true\n\t\t}\n\t]\n}");
 };
 Main.__name__ = true;
 Main.main = function() {

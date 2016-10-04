@@ -57,45 +57,44 @@ class Main {
 
 
 		panel5 = QuickSettings.create(730, 200);
-        panel5.addFileChooser("file chooser", "pick an image...", "image/*", onFileChosen);
-        panel5.addTextArea("file info", "");
-        panel5.setTextAreaRows("file info", 10);
-        panel5.addImage("image", "");
+		panel5.addFileChooser("file chooser", "pick an image...", "image/*", onFileChosen);
+		panel5.addTextArea("file info", "");
+		panel5.setTextAreaRows("file info", 10);
+		panel5.addImage("image", "");
 
-        var json =
+		var json =
 '{
-  "title": "Live Parse Demo",
-  "x": 490,
-  "y": 350,
-  "draggable": true,
-  "collapsible": true,
-  "snapToGrid": true,
-  "gridSize": 10,
-  "controls": [
-    {
-      "type": "range",
-      "title": "range test",
-      "min": 0,
-      "max": 100,
-      "value": 50,
-      "step": 1
-    },
-    {
-      "type": "textarea",
-      "title": "text area test",
-      "value": "just some text"
-    },
-    {
-      "type": "boolean",
-      "title": "boolean test",
-      "value": true
-    }
-  ]
+	"title": "Live Parse Demo",
+	"x": 490,
+	"y": 350,
+	"draggable": true,
+	"collapsible": true,
+	"snapToGrid": true,
+	"gridSize": 10,
+	"controls": [
+		{
+			"type": "range",
+			"title": "range test",
+			"min": 0,
+			"max": 100,
+			"value": 50,
+			"step": 1
+		},
+		{
+			"type": "textarea",
+			"title": "text area test",
+			"value": "just some text"
+		},
+		{
+			"type": "boolean",
+			"title": "boolean test",
+			"value": true
+		}
+	]
 }';
 
 
-        var panel6 = QuickSettings.parse(json);
-
+		var panel6 = QuickSettings.parse(json);
 	}
 
 	function output(name:String, value:String) {
@@ -103,10 +102,10 @@ class Main {
 	}
 
 	function onFileChosen(file) {
-        Browser.console.log(file);
-        panel5.setText("file info", "name: " + file.name + "\n\nsize: " + file.size + " bytes\n\ndate: " + file.lastModifiedDate + "\n\ntype: " + file.type);
-        panel5.setImageURL("image", js.html.URL.createObjectURL(cast (file, js.html.File)));
-    }
+		Browser.console.log(file);
+		panel5.setText("file info", "name: " + file.name + "\n\nsize: " + file.size + " bytes\n\ndate: " + file.lastModifiedDate + "\n\ntype: " + file.type);
+		panel5.setImageURL("image", js.html.URL.createObjectURL(cast (file, js.html.File)));
+	}
 
 	static public function main () {
 		var app = new Main ();
