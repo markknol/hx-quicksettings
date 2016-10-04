@@ -4,11 +4,13 @@ import js.html.Element;
 
 /**
  * QuickSettings is a JavaScript library for making a quick settings panel to control code parameters.
+ *
+ * @website: https://github.com/bit101/quicksettings
+ * @licence: MIT
+ * @version: 2.1
  */
 @:native("QuickSettings")
 extern class QuickSettings {
-
-  // version 2.1
 
   /**
    * Static method. Creates a new QuickSettings Panel

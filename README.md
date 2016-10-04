@@ -1,10 +1,10 @@
-<img src="https://cloud.githubusercontent.com/assets/576184/9329463/0559a0fe-45b2-11e5-8724-3a606419ecbf.png" width=100 align=right /> 
+<img src="https://cloud.githubusercontent.com/assets/576184/9329463/0559a0fe-45b2-11e5-8724-3a606419ecbf.png" width=100 align=right />
 
 ### [Haxe](http://haxe.org) extern classes for [QuickSettings](https://github.com/bit101/quicksettings).
 
  > QuickSettings is a JavaScript library for making a quick settings panel to control code parameters.
 
-<img src="https://github.com/bit101/quicksettings/blob/master/images/chrome_pc.png" align=right width=190/>
+![](panels.png)
 
 ## Usage in Haxe
 
@@ -14,12 +14,22 @@ Download and add the .[js](https://raw.githubusercontent.com/bit101/quicksetting
 <script type="text/javascript" src="quicksettings.js"></script>
 ```
 
+or
+
+```html
+<script type="text/javascript" src="https://cdn.jsdelivr.net/quicksettings/latest/quicksettings.min.js"></script>
+```
+
+
 In Haxe/JavaScript you can use the panel like this:
 ```haxe
 import quicksettings.QuickSettings;
 
 var settings:QuickSettings = QuickSettings.create(20, 20, "Settings");
 ```
+
+check out the [example](example) folder for more.
+
 **Enjoy!**
 
 Read more at the original project: https://github.com/bit101/quicksettings
