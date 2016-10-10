@@ -181,6 +181,46 @@ extern class QuickSettings {
   public function hide():QuickSettings;
 
   /**
+   * Show a control title
+   */
+  public function showTitle(name:String):QuickSettings;
+
+  /**
+   * Hide a control title
+   */
+  public function hideTitle(name:String):QuickSettings;
+
+  /**
+   * Hide all titles
+   */
+  public function hideAllTitles():QuickSettings;
+
+  /**
+   * Show all titles
+   */
+  public function showAllTitles():QuickSettings;
+
+  /**
+   * Show a control
+   */
+  public function showControl(name:String):QuickSettings;
+
+  /**
+   * Hide a control
+   */
+  public function hideControl(name:String):QuickSettings;
+
+  /**
+   * Enable/disable snapping controls to a grid
+   */
+  public function setSnapToGrid(enabled:Bool):QuickSettings;
+
+  /**
+   * Set grid snap size
+   */
+  public function setGridSize(size:Float):QuickSettings;
+  
+  /**
    * Toggle visibility state QuickSettings panel
    */
   public function toggleVisibility():QuickSettings;
