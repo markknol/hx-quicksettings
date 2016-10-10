@@ -16,14 +16,14 @@ import haxe.extern.EitherType;
 extern class QuickSettings {
 
   /**
-   * Static method. Creates a new QuickSettings Panel
-   * @param x     {Number}    x position of panel (default 0)
-   * @param y     {Number}    y position of panel (default 0)
+   * Creates a new QuickSettings Panel
+   * @param x     {Float}    x position of panel (default 0)
+   * @param y     {Float}    y position of panel (default 0)
    * @param title   {String}    title of panel (default "QuickSettings")
    * @param parent  {HTMLElement} parent element (default document.body)
    * @returns {module:QuickSettings}  New QuickSettings Panel
    */
-  public static function create(x:Float, y:Float, ?title:String, ?element:Element):QuickSettings;
+  public static function create(x:Float, y:Float, ?title:String, ?parent:Element):QuickSettings;
 
   /**
    * Creates a new QuickSettings Panel from a JSON string or object.
@@ -36,7 +36,22 @@ extern class QuickSettings {
   /**
    * creates a range slider
    */
-  public function addRange<T:Float>(title:String, min:T, max:T, value:T, step:T, callback:T->Void):Void;
+  public function addRange<T:Float>(title:String, min:T, max:T, value:T, step:T, callback:T->Void):QuickSettings;
+
+  /**
+   * adds a date input. `date` String must be formatted like "YYYY-MM-DD". Or use a JS Date object
+   */
+  // @:overload(function(title:String, date:Dynamic,callback:Dynamic->Void):QuickSettings{})
+  public function addDate(title:String, date:EitherType<String, Date>, callback:String->Void):QuickSettings;
+
+  /**
+   * adds a time input. `time` String must be formatted like "HH-MM" or "HH:MM:SS" in 24-hour format. Or use a JS Date object
+   * @param title {String} The title of the control.
+   * @param time {String|Date} A string in the format "HH:MM", "HH:MM:SS" or a Date object.
+   * @param callback {Function} Callback function that will be called when the value of this control changes.
+  */
+  // @:overload(function(title:String, time:Dynamic,callback:Dynamic->Void):QuickSettings{})
+  public function addTime(title:String, time:EitherType<String, Date>, callback:String->Void):QuickSettings;
 
   /**
    * Adds a number control.
@@ -47,49 +62,12 @@ extern class QuickSettings {
    * @param step {Float} Size of value increments.
    * @param callback {Function} Callback function to call when control value changes.
    */
-  public function addNumber<T:Float>(title:String, min:T, max:T, value:T, step:T, callback:T->Void):Void;
+  public function addNumber<T:Float>(title:String, min:T, max:T, value:T, step:T, callback:T->Void):QuickSettings;
 
   /**
-   * creates a color input
+   * creates a color input. `color` can be "#f00", "#ff0000", "red", "rgb(255, 0, 0)", "rgba(255, 0, 0, 1)".
    */
-  public function addColor(title:String, color:String, callback:String->Void):Void;
-
-  /**
-   * creates a checkbox
-   */
-  public function addBoolean(title:String, value:Bool, callback:Bool->Void):Void;
-
-  /**
-   * creates an input text:String field
-   */
-  public function addText(title:String, text:String, callback:String->Void):Void;
-
-  /**
-   * creates a resizable text area
-   */
-  public function addTextArea(title:String, ?text:String, ?callback:String->Void):Void;
-
-  /**
-   * creates a button
-   */
-  public function addButton(title:String, callback:Void->Void):Void;
-
-  /**
-   * creates informational text:String
-   * deprecated. Identical to addHTML
-   */
-  @:deprecated("addInfo is deprecated, use addHTML instead")
-  public function addInfo(title:String, text:String):Void;
-
-  /**
-   * creates a dropdown list
-   */
-  public function addDropDown<T>(title:String, items:Array<T>, callback:Array<T>->Void):Void;
-
-  /**
-   * creates and image element with the specified URL
-   */
-  public function addImage(title:String, imageURL:String):Void;
+  public function addColor(title:String, color:String, callback:String->Void):QuickSettings;
 
   /**
    * Adds a password input field.
@@ -97,29 +75,51 @@ extern class QuickSettings {
    * @param text {String} The initial text value to put in the control.
    * @param callback {Function} Callback that will be called when the value of this control changes.
    */
-  public function addPassword(title:String, text:String, callback:String->Void):Void;
+  public function addPassword(title:String, text:String, callback:String->Void):QuickSettings;
 
   /**
-   * Adds a date input control. In some browsers this will just render as a text input field, but should still retain all other functionality.
-   * @param title {String} The title of the control.
-   * @param date {String|Date} A string in the format "YYYY-MM-DD" or a Date object.
-   * @param callback {Function} Callback function that will be called when the value of this control changes.
-   * @returns {*}
+   * creates a checkbox
    */
-  public function addDate(title:String, date:EitherType<String, Date>, callback:String->Void):Void;
+  public function addBoolean(title:String, value:Bool, callback:Bool->Void):QuickSettings;
 
   /**
-   * Adds a time input control. In some browsers this will just render as a text input field, but should still retain all other functionality.
-   * @param title {String} The title of the control.
-   * @param time {String|Date} A string in the format "HH:MM", "HH:MM:SS" or a Date object.
-   * @param callback {Function} Callback function that will be called when the value of this control changes.
-  */
-  public function addTime(title:String, time:EitherType<String, Date>, callback:String->Void):Void;
+   * creates an input text:String field
+   */
+  public function addText(title:String, text:String, callback:String->Void):QuickSettings;
+
+  /**
+   * creates a resizable text area
+   */
+  public function addTextArea(title:String, ?text:String, ?callback:String->Void):QuickSettings;
+
+  /**
+   * creates a button
+   */
+  public function addButton(title:String, callback:Void->Void):QuickSettings;
+
+  /**
+   * creates informational text:String
+   * deprecated. Identical to addHTML
+   */
+  @:deprecated("addInfo is deprecated, use addHTML instead")
+  public function addInfo(title:String, text:String):QuickSettings;
+
+  /**
+   * creates a dropdown list
+   */
+  public function addDropDown<T>(title:String, items:Array<T>, callback:Array<T>->Void):QuickSettings;
+
+  /**
+   * creates and image element with the specified URL
+   */
+  public function addImage(title:String, imageURL:String):QuickSettings;
+
+
 
   /**
    * creates a progress bar
    */
-  public function addProgressBar<T:Float>(title:String, max:T, value:T, ?showNumbers:Bool):Void;
+  public function addProgressBar<T:Float>(title:String, max:T, value:T, ?showNumbers:Bool):QuickSettings;
 
   /**
    * Adds a file input control to the panel.
@@ -130,87 +130,158 @@ extern class QuickSettings {
    * @param filter {String} Species what file types the chooser will accept. See below.
    * @param callback {Function} Callback function that will be called when a file is chosen.
    */
-  public function addFileChooser(title:String, labelStr:String, filter:String, callback:OnFileChosen->Void):Void;
+  public function addFileChooser(title:String, labelStr:String, filter:String, callback:js.html.File->Void):QuickSettings;
+  // public function addFileChooser(title:String, labelStr:String, filter:String, callback:OnFileChosen->Void):Void;
 
   /**
    * adds any arbitrary HTML element to the panel
    */
-  public function addElement(title:String, htmlElement:Element):Void;
+  public function addElement(title:String, htmlELement:Element):QuickSettings;
 
   /**
    * adds any arbitrary HTML to the panel
    */
-  public function addHTML(title:String, htmlString:String):Void;
+  public function addHTML(title:String, htmlString:String):QuickSettings;
 
-  // getters
   @:deprecated public function getInfo(title:String):String; // use getHTML instead
+  public function getTime(title:String):String;
+  public function getNumber<T:Float>(title:String):T;
   public function getRangeValue<T:Float>(title:String):T;
   public function getBoolean(title:String):Bool;
   public function getColor(title:String):String;
   public function getText(title:String):String;
-  public function getDropDownValue<T>(title:String):T;
-  public function getProgressValue<T:Float>(title:String):T;
   public function getDate(title:String):String;
   public function getHTML(title:String):String;
-  public function getNumberValue(title:String):String;
-  public function getTime(title:String):String;
   public function getFile(title:String):String;
+  public function getDropDownValue<T>(title:String):T;
+  public function getProgressValue<T:Float>(title:String):T;
+  public function getNumberValue<T:Float>(title:String):T;
   public function getValuesAsJSON(asString:String):String;
 
-  // setters
-  @:deprecated public function setInfo(title:String, text:String):Void; // use getHTML instead
-  public function setRangeValue(title:String, value:Float):Void;
-  public function setBoolean(title:String, value:Bool):Void;
-  public function setColor(title:String, color:String):Void;
-  public function setText(title:String, text:String):Void;
-  public function setDropDownIndex(title:String, index:Int):Void;
-  public function setImageURL(title:String, imageURL:String):Void;
-  public function setProgressValue<T:Float>(title:String, value:T):Void;
-  public function setDate(title:String, date:String):Void;
+  @:deprecated public function setInfo(title:String, text:String):QuickSettings; // use getHTML instead
+  public function setTime(title:String, time:String):QuickSettings;
+  public function setDate(title:String, date:String):QuickSettings;
+  public function setRangeValue(title:String, value:Float):QuickSettings;
+  public function setRangeParameters<T:Float>(title:String, min:T, max:T, step:T):QuickSettings;
+  public function setNumberParameters<T:Float>(title:String, min:T, max:T, step:T):QuickSettings;
+  public function setBoolean(title:String, value:Bool):QuickSettings;
+  public function setColor(title:String, color:String):QuickSettings;
+  public function setText(title:String, text:String):QuickSettings;
+  public function setDropDownIndex(title:String, index:Int):QuickSettings;
+  public function setImageURL(title:String, imageURL:String):QuickSettings;
+  public function setProgressValue<T:Float>(title:String, value:T):QuickSettings;
+  public function setNumberValue<T:Float>(title:String, value:T):QuickSettings;
   public function setHTML(title:String, html:String):Void;
-  public function setNumberValue(title:String, value:Float):Void;
-  public function setTime(title:String, time:String):Void;
-  public function setNumberParameters(title:String,  min:Float, max:Float, step:Float):Void;
-
-  /**
-   * Change the min, max or step of a range input.
-   */
-  public function setRangeParameters(title:String, min:Float, max:Float, step:Float):Void;
 
   /**
    * Set the number of rows in a text area (defaults to 5).
-   *
-   * Sets the number of rows in a text area control.
    * @param title {String} The control to set the number of rows on.
-   * @param rows {Integer} The number of rows in the text area.
+   * @param rows {Int} The number of rows in the text area.
    */
-  public function setTextAreaRows(title:String, rows:Int):Void;
-  public function setTextAreasRows(title:String, rows:Int):Void;
+  public function setTextAreaRows(title:String, rows:Int):QuickSettings;
+  public function setTextAreasRows(title:String, rows:Int):QuickSettings; // probably a spelling mistake
 
   /**
    * Remove control by title
    */
-  public function removeControl(title:String):Void;
+  public function removeControl(title:String):QuickSettings;
 
   /**
    * Disable control by title
    */
-  public function disableControl(title:String):Void;
+  public function disableControl(title:String):QuickSettings;
 
   /**
    * Enable control by title
    */
-  public function enableControl(title:String):Void;
+  public function enableControl(title:String):QuickSettings;
 
   /**
    * Set QuickSettings panel draggable or not
    */
-  public function setDraggable(value:Bool):Void;
+  public function setDraggable(value:Bool):QuickSettings;
 
   /**
    * Hide QuickSettings panel
    */
-  public function setCollaspible(value:Bool):Void;
+  public function setCollaspible(value:Bool):QuickSettings;
+
+
+  /**
+   * Collapse QuickSettings panel
+   */
+  public function collapse():QuickSettings;
+
+  /**
+   * Expand QuickSettings panel
+   */
+  public function expand():QuickSettings;
+
+  /**
+   * Toggle collapsed state QuickSettings panel
+   */
+  public function toggleCollapsed():QuickSettings;
+
+  /**
+   * Show QuickSettings panel
+   */
+  public function show():QuickSettings;
+
+  /**
+   * Hide QuickSettings panel
+   */
+  public function hide():QuickSettings;
+
+  /**
+   * Show a control title
+   */
+  public function showTitle(name:String):QuickSettings;
+
+  /**
+   * Hide a control title
+   */
+  public function hideTitle(name:String):QuickSettings;
+
+  /**
+   * Hide all titles
+   */
+  public function hideAllTitles():QuickSettings;
+
+  /**
+   * Show all titles
+   */
+  public function showAllTitles():QuickSettings;
+
+  /**
+   * Show a control
+   */
+  public function showControl(name:String):QuickSettings;
+
+  /**
+   * Hide a control
+   */
+  public function hideControl(name:String):QuickSettings;
+
+  /**
+   * Enable/disable snapping controls to a grid
+   */
+  public function setSnapToGrid(enabled:Bool):QuickSettings;
+
+  /**
+   * Set grid snap size
+   */
+  public function setGridSize(size:Float):QuickSettings;
+
+
+  /**
+   * Toggle visibility state QuickSettings panel
+   */
+  public function toggleVisibility():QuickSettings;
+
+  /**
+   * Set a keyboard key that will show and hide the panel when pressed
+   */
+  public function setKey(char:Int):QuickSettings;
 
   /**
    * Override most existing style properties for controls
@@ -218,126 +289,86 @@ extern class QuickSettings {
   public function overrideStyle(title:String, styleName:String, value:String):Void;
 
   /**
-   * Most controls, except for the boolean (checkbox) and button controls show a title label above the actual control. You can turn this on and off for any specific control:
-   */
-  public function hideTitle(title:String):Void;
-  public function showTitle(title:String):Void;
-
-  public function hideAllTitles():Void;
-  public function showAllTitles():Void;
-
-  /**
-   * Collapse QuickSettings panel
-   */
-  public function collapse():Void;
-
-  /**
-   * Expand QuickSettings panel
-   */
-  public function expand():Void;
-
-  /**
-   * Toggle collapsed state QuickSettings panel
-   */
-  public function toggleCollapsed():Void;
-
-  /**
-   * Show QuickSettings panel
-   */
-  public function show():Void;
-
-  /**
-   * Hide QuickSettings panel
-   */
-  public function hide():Void;
-
-  /**
-   * Toggle visibility state QuickSettings panel
-   */
-  public function toggleVisibility():Void;
-
-  /**
-   * Set a keyboard key that will show and hide the panel when pressed
-   */
-  public function setKey(char:Int):Void;
-
-  /**
    * Set the position of the QuickSettings panel
    */
-  public function setPosition(x:Float, y:Float):Void;
+  public function setPosition(x:Float, y:Float):QuickSettings;
 
   /**
    * Set the size of the QuickSettings panel
    */
-  public function setSize(w:Float, h:Float):Void;
+  public function setSize(w:Float, h:Float):QuickSettings;
 
   /**
    * Set the width of the QuickSettings panel
    */
-  public function setWidth(w:Float):Void;
+  public function setWidth(w:Float):QuickSettings;
 
   /**
    * Set the height of the QuickSettings panel
    */
-  public function setHeight(h:Float):Void;
-
-  // If the panel is draggable, you can have it snap to a grid when dropped. And you can specify the size of that grid:
-  public function setSnapToGrid(bool:Bool):Void;
-  public function setGridSize(number:Int):Void;
+  public function setHeight(h:Float):QuickSettings;
 
   /**
    * Global change handler. This callback will be called whenever any change is made to any control in this panel.
    */
-  public function setGlobalChangeHandler(callback:Dynamic->Void):Void;
+  public function setGlobalChangeHandler(callback:Dynamic->Dynamic):QuickSettings;
+  // public function setGlobalChangeHandler(callback:Dynamic->Void):Void;
 
-  public function bindRange<T:Float>(property:String, min:T, max:T, value:T, step:Float, object:Dynamic):Void;
-  public function bindColor(property:String, color:String, object:Dynamic):Void;
-  public function bindBoolean(property:String, value:Bool, object:Dynamic):Void;
-  public function bindText(property:String, text:String, object:Dynamic):Void;
-  public function bindDropDown<T>(property:String, items:Array<T>, object:Dynamic):Void;
-  public function bindDate(title:String, date:String, object:Dynamic):Void;
+  public function bindRange<T:Float>(property:String, min:T, max:T, value:T, step:Float, object:Dynamic):QuickSettings;
+  public function bindColor(property:String, color:String, object:Dynamic):QuickSettings;
+  public function bindBoolean(property:String, value:Bool, object:Dynamic):QuickSettings;
+  public function bindText(property:String, text:String, object:Dynamic):QuickSettings;
+  public function bindDate(property:String, date:String, object:Dynamic):QuickSettings;
+  public function bindTime(property:String, time:String, object:Dynamic):QuickSettings;
+  public function bindDropDown<T>(property:String, items:Array<T>, object:Dynamic):QuickSettings;
   public function bindNumber(title:String, value:String, object:Dynamic):Void;
   public function bindPassword(title:String, text:String, object:Dynamic):Void;
   public function bindTextArea(title:String, text:String, object:Dynamic):Void;
-  public function bindTime(title:String, time:String, object:Dynamic):Void;
 
 }
-
-typedef OnFileChosen = {
-  var type : String;
-  var size : String;
-  var name : String;
-  var lastModifiedDate : String;
-}
-
-// not sure how usefull...
 
 typedef QSettings =
 {
-  @optional var title : String;               // optional string, default "QuickSettings"
-  @optional var x : Int;                      // optional number, default 0
-  @optional var y : Int;                      // optional number, default 0
-  @optional var draggable : Bool;             // optional bool,   default true
-  @optional var collapsible : Bool;           // optional bool,   default true
-  @optional var snapToGrid : Bool;            // optional bool,   default false
-  @optional var gridSize : Int;               // optional number  default 0
-  @optional var controls : Array<QControls>;   // optional array of control objects
+  /** optional string, default "QuickSettings" **/
+  @optional var title : String;
+  /** optional number, default 0 **/
+  @optional var x : Int;
+  /** optional number, default 0 **/
+  @optional var y : Int;
+  /** optional bool,   default true **/
+  @optional var draggable : Bool;
+  /** optional bool,   default true **/
+  @optional var collapsible : Bool;
+  /** optional bool,   default false **/
+  @optional var snapToGrid : Bool;
+  /** optional number  default 0 **/
+  @optional var gridSize : Int;
+  /** optional array of control objects **/
+  @optional var controls : Array<QControls>;
 };
 
 typedef QControls =
 {
-  var type : String;                          // required string
-  var title : String;                         // required string
-  @optional var value : Dynamic;              // optional value:
-                                                // number or string for most controls.
-                                                // bool for boolean
-                                                // array of option labels for dropdown
-                                                // not used for button
-  @optional var min : Int;                    // optional number (range and number only)
-  @optional var max : Int;                    // optional number (range, number, progressbar only)
-  @optional var step : Int;                   // optional number (range and number only)
-  @optional var callback : Void;              // optional string - maps to function name on scope object,
-  @optional var labelStr : String;            // optional string (file chooser)
-  @optional var filter : String;              // optional string (file chooser)
-
+  /** required string **/
+  var type : String;
+  /** required string **/
+  var title : String;
+  /** optional value:
+  * - number or string for most controls.
+  * - bool for boolean
+  * - array of option labels for dropdown
+  * - not used for button **/
+  @optional var value : Dynamic;
+  /** optional number (range and number only) **/
+  @optional var min : Int;
+  /** optional number (range, number, progressbar only) **/
+  @optional var max : Int;
+  /** optional number (range and number only) **/
+  @optional var step : Int;
+  /** optional string - maps to function name on scope object, **/
+  @optional var callback : Dynamic;
+  /** optional string (file chooser) **/
+  @optional var labelStr : String;
+  /** optional string (file chooser) **/
+  @optional var filter : String;
 };

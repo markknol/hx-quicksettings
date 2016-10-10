@@ -6,6 +6,16 @@ function $extend(from, fields) {
 	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;
 	return proto;
 }
+var HxOverrides = function() { };
+HxOverrides.__name__ = true;
+HxOverrides.dateStr = function(date) {
+	var m = date.getMonth() + 1;
+	var d = date.getDate();
+	var h = date.getHours();
+	var mi = date.getMinutes();
+	var s = date.getSeconds();
+	return date.getFullYear() + "-" + (m < 10?"0" + m:"" + m) + "-" + (d < 10?"0" + d:"" + d) + " " + (h < 10?"0" + h:"" + h) + ":" + (mi < 10?"0" + mi:"" + mi) + ":" + (s < 10?"0" + s:"" + s);
+};
 var Main = function() {
 	this.document = window.document;
 	var _gthis = this;
@@ -88,7 +98,7 @@ Main.prototype = {
 	}
 	,onFileChosen: function(file) {
 		window.console.log(file);
-		this.panel5.setText("file info","name: " + file.name + "\n\nsize: " + file.size + " bytes\n\ndate: " + file.lastModifiedDate + "\n\ntype: " + file.type);
+		this.panel5.setText("file info","name: " + file.name + "\n\nsize: " + file.size + " bytes\n\ndate: " + Std.string(file.lastModifiedDate) + "\n\ntype: " + file.type);
 		this.panel5.setImageURL("image",URL.createObjectURL(js_Boot.__cast(file , File)));
 	}
 	,__class__: Main

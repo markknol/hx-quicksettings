@@ -115,7 +115,7 @@ class Main {
 		panel4.setText("Output", name + " : " + value);
 	}
 
-	function onFileChosen(file) {
+	function onFileChosen(file:js.html.File) {
 		Browser.console.log(file);
 		panel5.setText("file info", "name: " + file.name + "\n\nsize: " + file.size + " bytes\n\ndate: " + file.lastModifiedDate + "\n\ntype: " + file.type);
 		panel5.setImageURL("image", js.html.URL.createObjectURL(cast (file, js.html.File)));
