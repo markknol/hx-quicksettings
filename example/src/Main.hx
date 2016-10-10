@@ -18,6 +18,7 @@ class Main {
 
 	public function new () {
 
+		// demo/basic example
 		var panel1 = QuickSettings.create(10, 10, "Panel 1");
 		panel1.addRange("Range", 0, 100, 30, 1, function(value) { output("Range", Std.string(value));});
 		panel1.addNumber("Number", 0, 100, 50, 1, function(value) { output("Number", Std.string(value));});
@@ -38,7 +39,6 @@ class Main {
 		context.arc(50, 50, 50, 0, Math.PI * 2);
 		context.fill();
 
-
 		var panel2 = QuickSettings.create(250, 10, "Panel 2");
 		panel2.addDropDown("DropDown", ["one", "two", "three"], function(value:Dynamic) { output("DropDown", value.value);});
 		// panel2.addDropDown("DropDown", ["one", "two", "three"], function(value:Dynamic) { trace('$value'); trace(Type.typeof(value));trace(value.value);});
@@ -55,13 +55,14 @@ class Main {
 		panel4 = QuickSettings.create(730, 10, "Output Panel");
 		panel4.addTextArea("Output");
 
-
+		// filechooser example
 		panel5 = QuickSettings.create(730, 200);
 		panel5.addFileChooser("file chooser", "pick an image...", "image/*", onFileChosen);
 		panel5.addTextArea("file info", "");
 		panel5.setTextAreaRows("file info", 10);
 		panel5.addImage("image", "");
 
+		// parse example
 		var json =
 '{
 	"title": "Live Parse Demo",
@@ -92,9 +93,22 @@ class Main {
 		}
 	]
 }';
-
-
 		var panel6 = QuickSettings.parse(json);
+
+		// bind example
+		var settings = QuickSettings.create(730 + 240, 10, "HTML demo");
+		settings.addInfo("info", "Since all the previous demos were canvas-based, I just wanted to show that there's no dependency on canvas here.");
+		settings.addInfo("info2", "Most of this is done through direct binding on the HTML objects.");
+		settings.addInfo("info3", "The fontSize control needs a callback because we have to add a unit (px or whatever)");
+		settings.bindText("title", document.title, document);
+		settings.bindColor("backgroundColor", "#ffffff", document.body.style);
+		settings.bindText("innerHTML", "Hello world", document.getElementsByTagName("h1")[0]);
+		settings.bindDropDown("fontFamily", ["serif", "sans-serif", "monospace", "cursive"], document.body.style);
+		settings.addRange("fontSize", 1, 40, 10, 1, function(value) {
+			// can't bind directly, because we need to add "px" or other unit :(
+			document.getElementsByTagName("p")[0].style.fontSize = value + "px";
+		});
+
 	}
 
 	function output(name:String, value:String) {

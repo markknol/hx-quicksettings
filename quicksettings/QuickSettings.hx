@@ -1,6 +1,9 @@
 package quicksettings;
+
 import js.html.HtmlElement;
 import js.html.Element;
+
+import haxe.extern.EitherType;
 
 /**
  * QuickSettings is a JavaScript library for making a quick settings panel to control code parameters.
@@ -28,7 +31,7 @@ extern class QuickSettings {
    * @param parent {HTMLElement} The parent element to attach the new panel to.
    * @param scope {Object} The object to look for any callbacks on.
    */
-  public static function parse(json:String, ?parent:Element, ?scope:Dynamic):QuickSettings;
+  public static function parse(json:EitherType<QSettings, String>, ?parent:Element, ?scope:Dynamic):QuickSettings;
 
   /**
    * creates a range slider
@@ -75,7 +78,7 @@ extern class QuickSettings {
    * creates informational text:String
    * deprecated. Identical to addHTML
    */
-  @:deprecated
+  @:deprecated("addInfo is deprecated, use addHTML instead")
   public function addInfo(title:String, text:String):Void;
 
   /**
@@ -103,7 +106,7 @@ extern class QuickSettings {
    * @param callback {Function} Callback function that will be called when the value of this control changes.
    * @returns {*}
    */
-  public function addDate(title:String, date:String, callback:String->Void):Void;
+  public function addDate(title:String, date:EitherType<String, Date>, callback:String->Void):Void;
 
   /**
    * Adds a time input control. In some browsers this will just render as a text input field, but should still retain all other functionality.
@@ -111,7 +114,7 @@ extern class QuickSettings {
    * @param time {String|Date} A string in the format "HH:MM", "HH:MM:SS" or a Date object.
    * @param callback {Function} Callback function that will be called when the value of this control changes.
   */
-  public function addTime(title:String, time:String, callback:String->Void):Void;
+  public function addTime(title:String, time:EitherType<String, Date>, callback:String->Void):Void;
 
   /**
    * creates a progress bar
@@ -126,7 +129,6 @@ extern class QuickSettings {
    * @param lableStr {String} The initial label on the file button. Defaults to "Choose a file...".
    * @param filter {String} Species what file types the chooser will accept. See below.
    * @param callback {Function} Callback function that will be called when a file is chosen.
-   * @returns {module:QuickSettings}
    */
   public function addFileChooser(title:String, labelStr:String, filter:String, callback:OnFileChosen->Void):Void;
 
@@ -210,12 +212,14 @@ extern class QuickSettings {
    */
   public function setCollaspible(value:Bool):Void;
 
-  // Finally, you can override most existing style properties for controls with:
+  /**
+   * Override most existing style properties for controls
+   */
   public function overrideStyle(title:String, styleName:String, value:String):Void;
 
-/**
- * Most controls, except for the boolean (checkbox) and button controls show a title label above the actual control. You can turn this on and off for any specific control:
- */
+  /**
+   * Most controls, except for the boolean (checkbox) and button controls show a title label above the actual control. You can turn this on and off for any specific control:
+   */
   public function hideTitle(title:String):Void;
   public function showTitle(title:String):Void;
 
@@ -284,7 +288,7 @@ extern class QuickSettings {
   /**
    * Global change handler. This callback will be called whenever any change is made to any control in this panel.
    */
-  public function setGlobalChangeHandler(callback:Dynamic->Dynamic):Void;
+  public function setGlobalChangeHandler(callback:Dynamic->Void):Void;
 
   public function bindRange<T:Float>(property:String, min:T, max:T, value:T, step:Float, object:Dynamic):Void;
   public function bindColor(property:String, color:String, object:Dynamic):Void;
@@ -305,3 +309,35 @@ typedef OnFileChosen = {
   var name : String;
   var lastModifiedDate : String;
 }
+
+// not sure how usefull...
+
+typedef QSettings =
+{
+  @optional var title : String;               // optional string, default "QuickSettings"
+  @optional var x : Int;                      // optional number, default 0
+  @optional var y : Int;                      // optional number, default 0
+  @optional var draggable : Bool;             // optional bool,   default true
+  @optional var collapsible : Bool;           // optional bool,   default true
+  @optional var snapToGrid : Bool;            // optional bool,   default false
+  @optional var gridSize : Int;               // optional number  default 0
+  @optional var controls : Array<QControls>;   // optional array of control objects
+};
+
+typedef QControls =
+{
+  var type : String;                          // required string
+  var title : String;                         // required string
+  @optional var value : Dynamic;              // optional value:
+                                                // number or string for most controls.
+                                                // bool for boolean
+                                                // array of option labels for dropdown
+                                                // not used for button
+  @optional var min : Int;                    // optional number (range and number only)
+  @optional var max : Int;                    // optional number (range, number, progressbar only)
+  @optional var step : Int;                   // optional number (range and number only)
+  @optional var callback : Void;              // optional string - maps to function name on scope object,
+  @optional var labelStr : String;            // optional string (file chooser)
+  @optional var filter : String;              // optional string (file chooser)
+
+};

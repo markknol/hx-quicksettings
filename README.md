@@ -6,7 +6,7 @@
 
 ![](panels.png)
 
-## Usage in Haxe
+## Normal usage
 
 Add CDN hosted javascript to your HTML file. It's included with the default [quicksettings.css](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings.min.css) so no need to add that.
 
@@ -44,7 +44,7 @@ don't forget to add it to your build file
 ```
 -lib hxquicksettings
 ```
-
+## Usage in Haxe
 
 In Haxe/JavaScript you can use the panel like this:
 ```haxe
@@ -54,6 +54,8 @@ var settings:QuickSettings = QuickSettings.create(20, 20, "Settings");
 ```
 
 Check out the [example](https://github.com/MatthijsKamstra/hx-quicksettings/blob/master/example/src/Main.hx) folder for more information.
+
+Or see it in action [here](http://htmlpreview.github.io/?https://github.com/MatthijsKamstra/hx-quicksettings/blob/master/example/bin/index.html)
 
 **Enjoy!**
 

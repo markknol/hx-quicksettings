@@ -66,6 +66,17 @@ var Main = function() {
 	this.panel5.setTextAreaRows("file info",10);
 	this.panel5.addImage("image","");
 	QuickSettings.parse("{\n\t\"title\": \"Live Parse Demo\",\n\t\"x\": 490,\n\t\"y\": 350,\n\t\"draggable\": true,\n\t\"collapsible\": true,\n\t\"snapToGrid\": true,\n\t\"gridSize\": 10,\n\t\"controls\": [\n\t\t{\n\t\t\t\"type\": \"range\",\n\t\t\t\"title\": \"range test\",\n\t\t\t\"min\": 0,\n\t\t\t\"max\": 100,\n\t\t\t\"value\": 50,\n\t\t\t\"step\": 1\n\t\t},\n\t\t{\n\t\t\t\"type\": \"textarea\",\n\t\t\t\"title\": \"text area test\",\n\t\t\t\"value\": \"just some text\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"boolean\",\n\t\t\t\"title\": \"boolean test\",\n\t\t\t\"value\": true\n\t\t}\n\t]\n}");
+	var settings = QuickSettings.create(970,10,"HTML demo");
+	settings.addInfo("info","Since all the previous demos were canvas-based, I just wanted to show that there's no dependency on canvas here.");
+	settings.addInfo("info2","Most of this is done through direct binding on the HTML objects.");
+	settings.addInfo("info3","The fontSize control needs a callback because we have to add a unit (px or whatever)");
+	settings.bindText("title",this.document.title,this.document);
+	settings.bindColor("backgroundColor","#ffffff",this.document.body.style);
+	settings.bindText("innerHTML","Hello world",this.document.getElementsByTagName("h1")[0]);
+	settings.bindDropDown("fontFamily",["serif","sans-serif","monospace","cursive"],this.document.body.style);
+	settings.addRange("fontSize",1,40,10,1,function(value10) {
+		_gthis.document.getElementsByTagName("p")[0].style.fontSize = value10 + "px";
+	});
 };
 Main.__name__ = true;
 Main.main = function() {
@@ -307,6 +318,8 @@ function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id
 String.prototype.__class__ = String;
 String.__name__ = true;
 Array.__name__ = true;
+Date.prototype.__class__ = Date;
+Date.__name__ = ["Date"];
 var Int = { __name__ : ["Int"]};
 var Dynamic = { __name__ : ["Dynamic"]};
 var Float = Number;
