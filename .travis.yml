@@ -4,8 +4,8 @@ haxe:
   - "3.2.1"
   - development
 
-script:
-  - cd example & haxe build.hxml
+hxml:
+  - build.hxml
 
 notifications:
   email: false

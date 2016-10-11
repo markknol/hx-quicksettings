@@ -1,0 +1,6 @@
+-cp example/src
+-cp .
+-lib quicksettings
+-main Main
+-js example/bin/hxquicksettings.js
+-dce full
