@@ -21,18 +21,24 @@ class Main {
 	var panel6 : QuickSettings;
 
 	public function new () {
+		document.addEventListener("DOMContentLoaded", function(event) {
+			init();
+		});
+	}
+
+	private function init(){
 
 		// demo/basic example
-		panel1 = QuickSettings.create(10, 10, "Panel 1");
-		panel1.addRange("Range", 0, 100, 30, 1, function(value) { output("Range", Std.string(value));});
-		panel1.addNumber("Number", 0, 100, 50, 1, function(value) { output("Number", Std.string(value));});
-		panel1.addColor("Color", "#ff0000", function(value) { output("Color", Std.string(value));});
-		panel1.addBoolean("Boolean", true, function(value) { output("Boolean", Std.string(value));});
-		panel1.addText("Text", "some text", function(value) { output("Text", Std.string(value));});
-		panel1.addTextArea("TextArea", "a whole bunch of text can go here", function(value) { output("TextArea", Std.string(value));});
-		panel1.addButton("Button", function() { output("Button", "clicked");});
-		// panel1.addInfo("Info", "Info. This is a description...");
-		panel1.addHTML("Info", "Info. This is a description...");
+		panel1 = QuickSettings.create(10, 10, "Panel 1")
+			.addRange("Range", 0, 100, 30, 1, function(value) { output("Range", Std.string(value));})
+			.addNumber("Number", 0, 100, 50, 1, function(value) { output("Number", Std.string(value));})
+			.addColor("Color", "#ff0000", function(value) { output("Color", Std.string(value));})
+			.addBoolean("Boolean", true, function(value) { output("Boolean", Std.string(value));})
+			.addText("Text", "some text", function(value) { output("Text", Std.string(value));})
+			.addTextArea("TextArea", "a whole bunch of text can go here", function(value) { output("TextArea", Std.string(value));})
+			.addButton("Button", function() { output("Button", "clicked");})
+		// 	.addInfo("Info", "Info. This is a description...")
+			.addHTML("Info", "Info. This is a description...");
 
 		var canvas : CanvasElement = cast (document.createElement("canvas"),CanvasElement);
 		var context = canvas.getContext("2d");
