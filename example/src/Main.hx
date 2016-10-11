@@ -46,21 +46,21 @@ class Main {
 		panel2.addProgressBar("ProgressBar", 100, 50);
 		panel2.addElement("Element (canvas)", canvas);
 
-		var panel3 = QuickSettings.create(490, 10, "Panel3");
-		panel3.addHTML("HTML", "<b>bold</b> <u>underline</u> <i>italic</i><ol><li>one</li><li>two</li><li>three</li>");
-		panel3.addPassword("Password", "12345678", function(value) output("Password", value));
-		panel3.addDate("Date", "2016-07-11", function(value) output("Date", value));
-		panel3.addTime("Time", "06:03:25", function(value) output("Time", value));
+		var panel3 = QuickSettings.create(490, 10, "Panel3")
+			.addHTML("HTML", "<b>bold</b> <u>underline</u> <i>italic</i><ol><li>one</li><li>two</li><li>three</li>")
+			.addPassword("Password", "12345678", function(value) output("Password", value))
+			.addDate("Date", "2016-07-11", function(value) output("Date", value))
+			.addTime("Time", "06:03:25", function(value) output("Time", value));
 
-		panel4 = QuickSettings.create(730, 10, "Output Panel");
-		panel4.addTextArea("Output");
+		panel4 = QuickSettings.create(730, 10, "Output Panel")
+			.addTextArea("Output");
 
 		// filechooser example
-		panel5 = QuickSettings.create(730, 200);
-		panel5.addFileChooser("file chooser", "pick an image...", "image/*", onFileChosen);
-		panel5.addTextArea("file info", "");
-		panel5.setTextAreaRows("file info", 10);
-		panel5.addImage("image", "");
+		panel5 = QuickSettings.create(730, 200)
+			.addFileChooser("file chooser", "pick an image...", "image/*", onFileChosen)
+			.addTextArea("file info", "")
+			.setTextAreaRows("file info", 10)
+			.addImage("image", "");
 
 		// parse example
 		var json ='{
@@ -79,13 +79,11 @@ class Main {
 					"max": 100,
 					"value": 50,
 					"step": 1
-				},
-				{
+				},{
 					"type": "textarea",
 					"title": "text area test",
 					"value": "just some text"
-				},
-				{
+				},{
 					"type": "boolean",
 					"title": "boolean test",
 					"value": true
