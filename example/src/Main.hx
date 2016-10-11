@@ -10,14 +10,15 @@ import js.html.CanvasElement;
 /**
  * @author Matthijs Kamstra aka[mck]
  */
-class Main {
+class Main
+{
 	static function main () new Main ();
 
 	var panel4:QuickSettings;
 	var panel5:QuickSettings;
 
-	public function new () {
-
+	public function new ()
+	{
 		// demo/basic example
 		var panel1 = QuickSettings.create(10, 10, "Panel 1")
 			.addRange("Range", 0, 100, 30, 1, function(value) output("Range", value))
@@ -32,19 +33,18 @@ class Main {
 		var canvas:CanvasElement = document.createCanvasElement();
 		canvas.width = 100;
 		canvas.height = 100;
-		
+
 		var context = canvas.getContext("2d");
 		context.beginPath();
 		context.fillStyle = "red";
 		context.arc(50, 50, 50, 0, Math.PI * 2);
 		context.fill();
 
-		var panel2 = QuickSettings.create(250, 10, "Panel 2");
-		panel2.addDropDown("DropDown", ["one", "two", "three"], function(value) output("DropDown", value.value));
-		// panel2.addDropDown("DropDown", ["one", "two", "three"], function(value) {trace('$value'); trace(Type.typeof(value));trace(value.value)});
-		panel2.addImage("Image", "boyhowdy.jpg");
-		panel2.addProgressBar("ProgressBar", 100, 50);
-		panel2.addElement("Element (canvas)", canvas);
+		var panel2 = QuickSettings.create(250, 10, "Panel 2")
+			.addDropDown("DropDown", ["one", "two", "three"], function(value) output("DropDown", value.value))
+			.addImage("Image", "boyhowdy.jpg")
+			.addProgressBar("ProgressBar", 100, 50)
+			.addElement("Element (canvas)", canvas);
 
 		var panel3 = QuickSettings.create(490, 10, "Panel3")
 			.addHTML("HTML", "<b>bold</b> <u>underline</u> <i>italic</i><ol><li>one</li><li>two</li><li>three</li>")
@@ -71,46 +71,46 @@ class Main {
 			"collapsible": true,
 			"snapToGrid": true,
 			"gridSize": 10,
-			"controls": [
-				{
-					"type": "range",
-					"title": "range test",
-					"min": 0,
-					"max": 100,
-					"value": 50,
-					"step": 1
-				},{
-					"type": "textarea",
-					"title": "text area test",
-					"value": "just some text"
-				},{
-					"type": "boolean",
-					"title": "boolean test",
-					"value": true
-				}
-			]
+			"controls": [{
+				"type": "range",
+				"title": "range test",
+				"min": 0,
+				"max": 100,
+				"value": 50,
+				"step": 1
+			},{
+				"type": "textarea",
+				"title": "text area test",
+				"value": "just some text"
+			},{
+				"type": "boolean",
+				"title": "boolean test",
+				"value": true
+			}]
 		}';
 		var panel6 = QuickSettings.parse(json);
 
 		// bind example
-		var settings = QuickSettings.create(730 + 240, 10, "HTML demo");
-		settings.addHTML("info", "Since all the previous demos were canvas-based, I just wanted to show that there's no dependency on canvas here.");
-		settings.addHTML("info2", "Most of this is done through direct binding on the HTML objects.");
-		settings.addHTML("info3", "The fontSize control needs a callback because we have to add a unit (px or whatever)");
-		settings.bindText("title", document.title, document);
-		settings.bindColor("backgroundColor", "#ffffff", document.body.style);
-		settings.bindText("innerHTML", "Hello world", document.getElementsByTagName("h1")[0]);
-		settings.bindDropDown("fontFamily", ["serif", "sans-serif", "monospace", "cursive"], document.body.style);
-		
+		var settings = QuickSettings.create(730 + 240, 10, "HTML demo")
+			.addHTML("info", "Since all the previous demos were canvas-based, I just wanted to show that there's no dependency on canvas here.")
+			.addHTML("info2", "Most of this is done through direct binding on the HTML objects.")
+			.addHTML("info3", "The fontSize control needs a callback because we have to add a unit (px or whatever)")
+			.bindText("title", document.title, document)
+			.bindColor("backgroundColor", "#ffffff", document.body.style)
+			.bindText("innerHTML", "Hello world", document.getElementsByTagName("h1")[0])
+			.bindDropDown("fontFamily", ["serif", "sans-serif", "monospace", "cursive"], document.body.style);
+
 		// can't bind directly, because we need to add "px" or other unit :(
 		settings.addRange("fontSize", 1, 40, 16, 1, function(value) document.getElementsByTagName("p")[0].style.fontSize = value + "px");
 	}
 
-	inline function output<T>(name:String, value:T) {
+	inline function output<T>(name:String, value:T)
+	{
 		panel4.setText("Output", '$name: $value');
 	}
 
-	function onFileChosen(file:js.html.File) {
+	function onFileChosen(file:js.html.File)
+	{
 		Browser.console.log(file);
 		panel5.setText("file info", 'name: ${file.name}\n\nsize: ${file.size} bytes\n\ndate: ${file.lastModifiedDate}\n\ntype: ${file.type}');
 		panel5.setImageURL("image", js.html.URL.createObjectURL(file));

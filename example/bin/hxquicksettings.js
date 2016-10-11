@@ -36,32 +36,21 @@ var Main = function() {
 	context.fillStyle = "red";
 	context.arc(50,50,50,0,Math.PI * 2);
 	context.fill();
-	var panel2 = QuickSettings.create(250,10,"Panel 2");
-	panel2.addDropDown("DropDown",["one","two","three"],function(value9) {
-		_g.panel4.setText("Output","" + "DropDown" + ": " + (value9.value == null?"null":"" + value9.value));
-	});
-	panel2.addImage("Image","boyhowdy.jpg");
-	panel2.addProgressBar("ProgressBar",100,50);
-	panel2.addElement("Element (canvas)",canvas);
-	var panel3 = QuickSettings.create(490,10,"Panel3").addHTML("HTML","<b>bold</b> <u>underline</u> <i>italic</i><ol><li>one</li><li>two</li><li>three</li>").addPassword("Password","12345678",function(value6) {
-		_g.panel4.setText("Output","" + "Password" + ": " + (value6 == null?"null":"" + value6));
-	}).addDate("Date","2016-07-11",function(value7) {
-		_g.panel4.setText("Output","" + "Date" + ": " + (value7 == null?"null":"" + value7));
-	}).addTime("Time","06:03:25",function(value8) {
-		_g.panel4.setText("Output","" + "Time" + ": " + (value8 == null?"null":"" + value8));
+	var panel2 = QuickSettings.create(250,10,"Panel 2").addDropDown("DropDown",["one","two","three"],function(value6) {
+		_g.panel4.setText("Output","" + "DropDown" + ": " + (value6.value == null?"null":"" + value6.value));
+	}).addImage("Image","boyhowdy.jpg").addProgressBar("ProgressBar",100,50).addElement("Element (canvas)",canvas);
+	var panel3 = QuickSettings.create(490,10,"Panel3").addHTML("HTML","<b>bold</b> <u>underline</u> <i>italic</i><ol><li>one</li><li>two</li><li>three</li>").addPassword("Password","12345678",function(value7) {
+		_g.panel4.setText("Output","" + "Password" + ": " + (value7 == null?"null":"" + value7));
+	}).addDate("Date","2016-07-11",function(value8) {
+		_g.panel4.setText("Output","" + "Date" + ": " + (value8 == null?"null":"" + value8));
+	}).addTime("Time","06:03:25",function(value9) {
+		_g.panel4.setText("Output","" + "Time" + ": " + (value9 == null?"null":"" + value9));
 	});
 	this.panel4 = QuickSettings.create(730,10,"Output Panel").addTextArea("Output");
 	this.panel5 = QuickSettings.create(730,200).addFileChooser("file chooser","pick an image...","image/*",$bind(this,this.onFileChosen)).addTextArea("file info","").setTextAreaRows("file info",10).addImage("image","");
-	var json = "{\r\n\t\t\t\"title\": \"Live Parse Demo\",\r\n\t\t\t\"x\": 490,\r\n\t\t\t\"y\": 350,\r\n\t\t\t\"draggable\": true,\r\n\t\t\t\"collapsible\": true,\r\n\t\t\t\"snapToGrid\": true,\r\n\t\t\t\"gridSize\": 10,\r\n\t\t\t\"controls\": [\r\n\t\t\t\t{\r\n\t\t\t\t\t\"type\": \"range\",\r\n\t\t\t\t\t\"title\": \"range test\",\r\n\t\t\t\t\t\"min\": 0,\r\n\t\t\t\t\t\"max\": 100,\r\n\t\t\t\t\t\"value\": 50,\r\n\t\t\t\t\t\"step\": 1\r\n\t\t\t\t},{\r\n\t\t\t\t\t\"type\": \"textarea\",\r\n\t\t\t\t\t\"title\": \"text area test\",\r\n\t\t\t\t\t\"value\": \"just some text\"\r\n\t\t\t\t},{\r\n\t\t\t\t\t\"type\": \"boolean\",\r\n\t\t\t\t\t\"title\": \"boolean test\",\r\n\t\t\t\t\t\"value\": true\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t}";
+	var json = "{\r\n\t\t\t\"title\": \"Live Parse Demo\",\r\n\t\t\t\"x\": 490,\r\n\t\t\t\"y\": 350,\r\n\t\t\t\"draggable\": true,\r\n\t\t\t\"collapsible\": true,\r\n\t\t\t\"snapToGrid\": true,\r\n\t\t\t\"gridSize\": 10,\r\n\t\t\t\"controls\": [{\r\n\t\t\t\t\"type\": \"range\",\r\n\t\t\t\t\"title\": \"range test\",\r\n\t\t\t\t\"min\": 0,\r\n\t\t\t\t\"max\": 100,\r\n\t\t\t\t\"value\": 50,\r\n\t\t\t\t\"step\": 1\r\n\t\t\t},{\r\n\t\t\t\t\"type\": \"textarea\",\r\n\t\t\t\t\"title\": \"text area test\",\r\n\t\t\t\t\"value\": \"just some text\"\r\n\t\t\t},{\r\n\t\t\t\t\"type\": \"boolean\",\r\n\t\t\t\t\"title\": \"boolean test\",\r\n\t\t\t\t\"value\": true\r\n\t\t\t}]\r\n\t\t}";
 	var panel6 = QuickSettings.parse(json);
-	var settings = QuickSettings.create(970,10,"HTML demo");
-	settings.addHTML("info","Since all the previous demos were canvas-based, I just wanted to show that there's no dependency on canvas here.");
-	settings.addHTML("info2","Most of this is done through direct binding on the HTML objects.");
-	settings.addHTML("info3","The fontSize control needs a callback because we have to add a unit (px or whatever)");
-	settings.bindText("title",window.document.title,window.document);
-	settings.bindColor("backgroundColor","#ffffff",window.document.body.style);
-	settings.bindText("innerHTML","Hello world",window.document.getElementsByTagName("h1")[0]);
-	settings.bindDropDown("fontFamily",["serif","sans-serif","monospace","cursive"],window.document.body.style);
+	var settings = QuickSettings.create(970,10,"HTML demo").addHTML("info","Since all the previous demos were canvas-based, I just wanted to show that there's no dependency on canvas here.").addHTML("info2","Most of this is done through direct binding on the HTML objects.").addHTML("info3","The fontSize control needs a callback because we have to add a unit (px or whatever)").bindText("title",window.document.title,window.document).bindColor("backgroundColor","#ffffff",window.document.body.style).bindText("innerHTML","Hello world",window.document.getElementsByTagName("h1")[0]).bindDropDown("fontFamily",["serif","sans-serif","monospace","cursive"],window.document.body.style);
 	settings.addRange("fontSize",1,40,16,1,function(value10) {
 		window.document.getElementsByTagName("p")[0].style.fontSize = value10 + "px";
 	});
