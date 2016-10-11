@@ -12,7 +12,7 @@ import js.html.CanvasElement;
  */
 class Main
 {
-	static function main () new Main ();
+	static function main () document.addEventListener("DOMContentLoaded", function(e) new Main());
 
 	var panel4:QuickSettings;
 	var panel5:QuickSettings;

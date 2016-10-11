@@ -57,7 +57,9 @@ var Main = function() {
 };
 Main.__name__ = true;
 Main.main = function() {
-	new Main();
+	window.document.addEventListener("DOMContentLoaded",function(e) {
+		new Main();
+	});
 };
 Main.prototype = {
 	onFileChosen: function(file) {
