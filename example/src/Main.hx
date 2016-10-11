@@ -13,13 +13,17 @@ class Main {
 	var window = Browser.window;
 	var document = Browser.document;
 
+	var panel1 : QuickSettings;
+	var panel2 : QuickSettings;
+	var panel3 : QuickSettings;
 	var panel4 : QuickSettings;
 	var panel5 : QuickSettings;
+	var panel6 : QuickSettings;
 
 	public function new () {
 
 		// demo/basic example
-		var panel1 = QuickSettings.create(10, 10, "Panel 1");
+		panel1 = QuickSettings.create(10, 10, "Panel 1");
 		panel1.addRange("Range", 0, 100, 30, 1, function(value) { output("Range", Std.string(value));});
 		panel1.addNumber("Number", 0, 100, 50, 1, function(value) { output("Number", Std.string(value));});
 		panel1.addColor("Color", "#ff0000", function(value) { output("Color", Std.string(value));});
@@ -39,14 +43,14 @@ class Main {
 		context.arc(50, 50, 50, 0, Math.PI * 2);
 		context.fill();
 
-		var panel2 = QuickSettings.create(250, 10, "Panel 2");
+		panel2 = QuickSettings.create(250, 10, "Panel 2");
 		panel2.addDropDown("DropDown", ["one", "two", "three"], function(value:Dynamic) { output("DropDown", value.value);});
 		// panel2.addDropDown("DropDown", ["one", "two", "three"], function(value:Dynamic) { trace('$value'); trace(Type.typeof(value));trace(value.value);});
 		panel2.addImage("Image", "boyhowdy.jpg");
 		panel2.addProgressBar("ProgressBar", 100, 50);
 		panel2.addElement("Element (canvas)", canvas);
 
-		var panel3 = QuickSettings.create(490, 10, "Panel3");
+		panel3 = QuickSettings.create(490, 10, "Panel3");
 		panel3.addHTML("HTML", "<b>bold</b> <u>underline</u> <i>italic</i><ol><li>one</li><li>two</li><li>three</li>");
 		panel3.addPassword("Password", "12345678", function(value) { output("Password", Std.string(value));});
 		panel3.addDate("Date", "2016-07-11", function(value) { output("Date", Std.string(value));});
@@ -93,7 +97,7 @@ class Main {
 		}
 	]
 }';
-		var panel6 = QuickSettings.parse(json);
+		panel6 = QuickSettings.parse(json);
 
 		// bind example
 		var settings = QuickSettings.create(730 + 240, 10, "HTML demo");
