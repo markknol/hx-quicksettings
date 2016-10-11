@@ -5,7 +5,7 @@ haxe:
   - development
 
 hxml:
-  - build.hxml
+  - example/build.hxml
 
 notifications:
   email: false
