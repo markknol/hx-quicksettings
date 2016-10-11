@@ -34,6 +34,11 @@ extern class QuickSettings {
   public static function parse(json:EitherType<QSettings, String>, ?parent:Element, ?scope:Dynamic):QuickSettings;
 
   /**
+   * Destroys the panel, removing it from the document and nulling all properties.
+   */
+  public function destroy():Void;
+
+  /**
    * creates a range slider
    */
   public function addRange<T:Float>(title:String, min:T, max:T, value:T, step:T, callback:T->Void):QuickSettings;
