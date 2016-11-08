@@ -2,6 +2,7 @@ package quicksettings;
 
 import js.html.HtmlElement;
 import js.html.Element;
+import js.html.InputElement;
 
 import haxe.extern.EitherType;
 
@@ -100,7 +101,7 @@ extern class QuickSettings {
   /**
    * creates a button
    */
-  public function addButton(title:String, callback:Void->Void):QuickSettings;
+  public function addButton(title:String, callback:InputElement->Void):QuickSettings;
 
   /**
    * creates informational text:String
