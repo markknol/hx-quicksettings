@@ -7,10 +7,10 @@ import haxe.extern.EitherType;
 
 /**
 	QuickSettings is a JavaScript library for making a quick settings panel to control code parameters.
-	
-	@website: <https://github.com/bit101/quicksettings>  
-	@licence: MIT  
-	@version: 2.1  
+
+	@website: <https://github.com/bit101/quicksettings>
+	@licence: MIT
+	@version: 2.2.1
 **/
 @:native("QuickSettings")
 extern class QuickSettings
