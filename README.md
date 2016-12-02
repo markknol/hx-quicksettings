@@ -4,6 +4,8 @@
 
  > QuickSettings is a JavaScript library for making a quick settings panel to control code parameters.
 
+Current Haxe Extern QuickSetting version **2.2.1**
+
 ![](panels.png)
 
 ## Normal usage
@@ -11,6 +13,9 @@
 Add CDN hosted javascript to your HTML file. It's included with the default [quicksettings.css](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings.min.css) so no need to add that.
 
 ```html
+<!-- current quicksettings externs 2.2.1 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/quicksettings/2.2.1/quicksettings.min.js"></script>
+<!-- latest quicksettings version is 3 and we need to address that -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/quicksettings/latest/quicksettings.min.js"></script>
 ```
 
