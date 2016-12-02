@@ -1,6 +1,6 @@
 <img src="https://cloud.githubusercontent.com/assets/576184/9329463/0559a0fe-45b2-11e5-8724-3a606419ecbf.png" width=100 align=right />
 
-### [Haxe](http://haxe.org) extern classes for [QuickSettings](https://github.com/bit101/quicksettings).
+### [Haxe](http://haxe.org) extern classes for [QuickSettings](https://github.com/bit101/quicksettings) [![Build Status](https://travis-ci.org/markknol/hx-quicksettings.svg?branch=master)](https://travis-ci.org/markknol/hx-quicksettings)
 
  > QuickSettings is a JavaScript library for making a quick settings panel to control code parameters.
 
