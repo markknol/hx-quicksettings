@@ -28,7 +28,11 @@ class Main
 			.addText("Text", "some text", function(value) output("Text", value))
 			.addTextArea("TextArea", "a whole bunch of text can go here", function(value) output("TextArea", value))
 			.addButton("Button", function() output("Button", "clicked"))
-			.addHTML("Info", "Info. This is a description...");
+			.addHTML("Info", "Info. This is a description...")
+			.setKey("s")
+			.saveInLocalStorage("localstoragedemo");
+
+		// for some reason I can't get setKey("s") to work
 
 		var canvas:CanvasElement = document.createCanvasElement();
 		canvas.width = 100;
@@ -62,33 +66,35 @@ class Main
 			.setTextAreaRows("file info", 10)
 			.addImage("image", "");
 
-		// parse example
-		var json ='{
-			"title": "Live Parse Demo",
-			"x": 490,
-			"y": 350,
-			"draggable": true,
-			"collapsible": true,
-			"snapToGrid": true,
-			"gridSize": 10,
-			"controls": [{
-				"type": "range",
-				"title": "range test",
-				"min": 0,
-				"max": 100,
-				"value": 50,
-				"step": 1
-			},{
-				"type": "textarea",
-				"title": "text area test",
-				"value": "just some text"
-			},{
-				"type": "boolean",
-				"title": "boolean test",
-				"value": true
-			}]
-		}';
-		var panel6 = QuickSettings.parse(json);
+
+		// not in version 3.0
+		// // parse example
+		// var json ='{
+		// 	"title": "Live Parse Demo",
+		// 	"x": 490,
+		// 	"y": 350,
+		// 	"draggable": true,
+		// 	"collapsible": true,
+		// 	"snapToGrid": true,
+		// 	"gridSize": 10,
+		// 	"controls": [{
+		// 		"type": "range",
+		// 		"title": "range test",
+		// 		"min": 0,
+		// 		"max": 100,
+		// 		"value": 50,
+		// 		"step": 1
+		// 	},{
+		// 		"type": "textarea",
+		// 		"title": "text area test",
+		// 		"value": "just some text"
+		// 	},{
+		// 		"type": "boolean",
+		// 		"title": "boolean test",
+		// 		"value": true
+		// 	}]
+		// }';
+		// var panel6 = QuickSettings.parse(json);
 
 		// bind example
 		var settings = QuickSettings.create(730 + 240, 10, "HTML demo")
@@ -106,13 +112,16 @@ class Main
 
 	inline function output<T>(name:String, value:T)
 	{
-		panel4.setText("Output", '$name: $value');
+		// panel4.setText("Output", '$name: $value');
+		panel4.setValue("Output", '$name: $value');
 	}
 
 	function onFileChosen(file:js.html.File)
 	{
 		Browser.console.log(file);
-		panel5.setText("file info", 'name: ${file.name}\n\nsize: ${file.size} bytes\n\ndate: ${file.lastModifiedDate}\n\ntype: ${file.type}');
-		panel5.setImageURL("image", js.html.URL.createObjectURL(file));
+		// panel5.setText("file info", 'name: ${file.name}\n\nsize: ${file.size} bytes\n\ndate: ${file.lastModifiedDate}\n\ntype: ${file.type}');
+		panel5.setValue("file info", 'name: ${file.name}\n\nsize: ${file.size} bytes\n\ndate: ${file.lastModifiedDate}\n\ntype: ${file.type}');
+		// panel5.setImageURL("image", js.html.URL.createObjectURL(file));
+		panel5.setValue("image", js.html.URL.createObjectURL(file));
 	}
 }

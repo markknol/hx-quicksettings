@@ -10,7 +10,7 @@ import haxe.extern.EitherType;
 
 	@website: <https://github.com/bit101/quicksettings>
 	@licence: MIT
-	@version: 2.2.1
+	@version: 3.0
 **/
 @:native("QuickSettings")
 extern class QuickSettings
@@ -32,7 +32,8 @@ extern class QuickSettings
 		@param parent {HTMLElement} The parent element to attach the new panel to.
 		@param scope {Object} The object to look for any callbacks on.
 	**/
-	public static function parse(json:EitherType<QSettings, String>, ?parent:Element, ?scope:Dynamic):QuickSettings;
+	// [mck] removed in version 3.0
+	// public static function parse(json:EitherType<QSettings, String>, ?parent:Element, ?scope:Dynamic):QuickSettings;
 
 	/**
 		Destroys the panel, removing it from the document and nulling all properties.
@@ -107,8 +108,9 @@ extern class QuickSettings
 		creates informational text:String
 		deprecated. Identical to addHTML
 	**/
-	@:deprecated("addInfo is deprecated, use addHTML instead")
-	public function addInfo(title:String, text:String):QuickSettings;
+		// [mck] removed in version 3.0
+	// @:deprecated("addInfo is deprecated, use addHTML instead")
+	// public function addInfo(title:String, text:String):QuickSettings;
 
 	/**
 		creates a dropdown list
@@ -147,35 +149,53 @@ extern class QuickSettings
 	**/
 	public function addHTML(title:String, htmlString:String):QuickSettings;
 
-	@:deprecated public function getInfo(title:String):String; // use getHTML instead
-	public function getTime(title:String):String;
-	public function getNumber<T:Float>(title:String):T;
-	public function getRangeValue<T:Float>(title:String):T;
-	public function getBoolean(title:String):Bool;
-	public function getColor(title:String):String;
-	public function getText(title:String):String;
-	public function getDate(title:String):String;
-	public function getHTML(title:String):String;
-	public function getFile(title:String):String;
-	public function getDropDownValue<T>(title:String):T;
-	public function getProgressValue<T:Float>(title:String):T;
-	public function getNumberValue<T:Float>(title:String):T;
-	public function getValuesAsJSON(asString:String):String;
+	/**
+        Sets up the panel to save all of its values to local storage. This will also immediately try to read in any saved values from local storage, if they exist.
+        So the method should be called after all controls are created on the panel.
+	**/
+	public function saveInLocalStorage (name:String):QuickSettings;
 
-	@:deprecated public function setInfo(title:String, text:String):QuickSettings; // use getHTML instead
-	public function setTime(title:String, time:String):QuickSettings;
-	public function setDate(title:String, date:String):QuickSettings;
-	public function setRangeValue(title:String, value:Float):QuickSettings;
-	public function setRangeParameters<T:Float>(title:String, min:T, max:T, step:T):QuickSettings;
-	public function setNumberParameters<T:Float>(title:String, min:T, max:T, step:T):QuickSettings;
-	public function setBoolean(title:String, value:Bool):QuickSettings;
-	public function setColor(title:String, color:String):QuickSettings;
-	public function setText(title:String, text:String):QuickSettings;
-	public function setDropDownIndex(title:String, index:Int):QuickSettings;
-	public function setImageURL(title:String, imageURL:String):QuickSettings;
-	public function setProgressValue<T:Float>(title:String, value:T):QuickSettings;
-	public function setNumberValue<T:Float>(title:String, value:T):QuickSettings;
-	public function setHTML(title:String, html:String):Void;
+	/**
+        Clears any saved values in local storage.
+    **/
+	public function clearLocalStorage (name:String):QuickSettings;
+
+
+	// [mck] have no idea how to fix this
+	public function setValue(title:String,value:Dynamic):Dynamic;
+	public function getValue(title:String):Void;
+
+	// [mck] removed in version 3.0
+	// @:deprecated public function getInfo(title:String):String; // use getHTML instead
+	// public function getTime(title:String):String;
+	// public function getNumber<T:Float>(title:String):T;
+	// public function getRangeValue<T:Float>(title:String):T;
+	// public function getBoolean(title:String):Bool;
+	// public function getColor(title:String):String;
+	// public function getText(title:String):String;
+	// public function getDate(title:String):String;
+	// public function getHTML(title:String):String;
+	// public function getFile(title:String):String;
+	// public function getDropDownValue<T>(title:String):T;
+	// public function getProgressValue<T:Float>(title:String):T;
+	// public function getNumberValue<T:Float>(title:String):T;
+	// public function getValuesAsJSON(asString:String):String;
+
+	// [mck] removed in version 3.0
+	// @:deprecated public function setInfo(title:String, text:String):QuickSettings; // use getHTML instead
+	// public function setTime(title:String, time:String):QuickSettings;
+	// public function setDate(title:String, date:String):QuickSettings;
+	// public function setRangeValue(title:String, value:Float):QuickSettings;
+	// public function setRangeParameters<T:Float>(title:String, min:T, max:T, step:T):QuickSettings;
+	// public function setNumberParameters<T:Float>(title:String, min:T, max:T, step:T):QuickSettings;
+	// public function setBoolean(title:String, value:Bool):QuickSettings;
+	// public function setColor(title:String, color:String):QuickSettings;
+	// public function setText(title:String, text:String):QuickSettings;
+	// public function setDropDownIndex(title:String, index:Int):QuickSettings;
+	// public function setImageURL(title:String, imageURL:String):QuickSettings;
+	// public function setProgressValue<T:Float>(title:String, value:T):QuickSettings;
+	// public function setNumberValue<T:Float>(title:String, value:T):QuickSettings;
+	// public function setHTML(title:String, html:String):Void;
 
 	/**
 		Set the number of rows in a text area (defaults to 5).
@@ -184,6 +204,16 @@ extern class QuickSettings
 	**/
 	public function setTextAreaRows(title:String, rows:Int):QuickSettings;
 	public function setTextAreasRows(title:String, rows:Int):QuickSettings; // probably a spelling mistake
+
+	/**
+		Sets values of any controls from a JSON object or string. The JSON is one large object with title: value elements for each control you want to set.
+	**/
+	public function setValuesFromJSON(json: EitherType<String, haxe.Json>):QuickSettings;
+
+	/**
+		Returns an object containing the titles and values of all user-interactive controls in this panel.
+	**/
+	public function getValuesAsJSON(asString:Bool):Dynamic;
 
 	/**
 		Remove control by title
@@ -268,12 +298,14 @@ extern class QuickSettings
 	/**
 		Enable/disable snapping controls to a grid
 	**/
-	public function setSnapToGrid(enabled:Bool):QuickSettings;
+	// [mck] removed in version 3.0
+	// public function setSnapToGrid(enabled:Bool):QuickSettings;
 
 	/**
 		Set grid snap size
 	**/
-	public function setGridSize(size:Float):QuickSettings;
+	// [mck] removed in version 3.0
+	// public function setGridSize(size:Float):QuickSettings;
 
 	/**
 		Toggle visibility state QuickSettings panel
@@ -283,7 +315,7 @@ extern class QuickSettings
 	/**
 		Set a keyboard key that will show and hide the panel when pressed
 	**/
-	public function setKey(char:Int):QuickSettings;
+	public function setKey(chart:String):QuickSettings;
 
 	/**
 		Override most existing style properties for controls
@@ -331,38 +363,38 @@ extern class QuickSettings
 typedef QSettings =
 {
 	/** optional string, default "QuickSettings" **/
-	@optional var title : String;
+	@:optional var title : String;
 
 	/** optional number, default 0 **/
-	@optional var x : Int;
+	@:optional var x : Int;
 
 	/** optional number, default 0 **/
-	@optional var y : Int;
+	@:optional var y : Int;
 
 	/** optional bool,   default true **/
-	@optional var draggable : Bool;
+	@:optional var draggable : Bool;
 
 	/** optional bool,   default true **/
-	@optional var collapsible : Bool;
+	@:optional var collapsible : Bool;
 
 	/** optional bool,   default false **/
-	@optional var snapToGrid : Bool;
+	@:optional var snapToGrid : Bool;
 
 	/** optional number  default 0 **/
-	@optional var gridSize : Int;
+	@:optional var gridSize : Int;
 
 	/** optional array of control objects **/
-	@optional var controls : Array<QControls>;
+	@:optional var controls : Array<QControls>;
 }
 
 typedef QControls =
 {
 	/** required string **/
-
 	var type : String;
-	/** required string **/
 
+	/** required string **/
 	var title : String;
+
 	/**
 		optional value:
 
@@ -371,23 +403,23 @@ typedef QControls =
 		- array of option labels for dropdown
 		- not used for button
 	**/
-	@optional var value : Dynamic;
+	@:optional var value : Dynamic;
 
 	/** optional number (range and number only) **/
-	@optional var min : Int;
+	@:optional var min : Int;
 
 	/** optional number (range, number, progressbar only) **/
-	@optional var max : Int;
+	@:optional var max : Int;
 
 	/** optional number (range and number only) **/
-	@optional var step : Int;
+	@:optional var step : Int;
 
 	/** optional string - maps to function name on scope object, **/
-	@optional var callback : Dynamic;
+	@:optional var callback : Dynamic;
 
 	/** optional string (file chooser) **/
-	@optional var labelStr : String;
+	@:optional var labelStr : String;
 
 	/** optional string (file chooser) **/
-	@optional var filter : String;
+	@:optional var filter : String;
 }

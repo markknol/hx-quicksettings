@@ -13,20 +13,20 @@ HxOverrides.dateStr = function(date) {
 var Main = function() {
 	var _gthis = this;
 	QuickSettings.create(10,10,"Panel 1").addRange("Range",0,100,30,1,function(value) {
-		_gthis.panel4.setText("Output","Range" + ": " + (value == null?"null":"" + value));
+		_gthis.panel4.setValue("Output","Range" + ": " + (value == null?"null":"" + value));
 	}).addNumber("Number",0,100,50,1,function(value1) {
-		_gthis.panel4.setText("Output","Number" + ": " + (value1 == null?"null":"" + value1));
+		_gthis.panel4.setValue("Output","Number" + ": " + (value1 == null?"null":"" + value1));
 	}).addColor("Color","#ff0000",function(value2) {
-		_gthis.panel4.setText("Output","Color" + ": " + (value2 == null?"null":"" + value2));
+		_gthis.panel4.setValue("Output","Color" + ": " + (value2 == null?"null":"" + value2));
 	}).addBoolean("Boolean",true,function(value3) {
-		_gthis.panel4.setText("Output","Boolean" + ": " + (value3 == null?"null":"" + value3));
+		_gthis.panel4.setValue("Output","Boolean" + ": " + (value3 == null?"null":"" + value3));
 	}).addText("Text","some text",function(value4) {
-		_gthis.panel4.setText("Output","Text" + ": " + (value4 == null?"null":"" + value4));
+		_gthis.panel4.setValue("Output","Text" + ": " + (value4 == null?"null":"" + value4));
 	}).addTextArea("TextArea","a whole bunch of text can go here",function(value5) {
-		_gthis.panel4.setText("Output","TextArea" + ": " + (value5 == null?"null":"" + value5));
+		_gthis.panel4.setValue("Output","TextArea" + ": " + (value5 == null?"null":"" + value5));
 	}).addButton("Button",function() {
-		_gthis.panel4.setText("Output","Button" + ": " + "clicked");
-	}).addHTML("Info","Info. This is a description...");
+		_gthis.panel4.setValue("Output","Button" + ": " + "clicked");
+	}).addHTML("Info","Info. This is a description...").setKey("s").saveInLocalStorage("localstoragedemo");
 	var canvas = window.document.createElement("canvas");
 	canvas.width = 100;
 	canvas.height = 100;
@@ -36,18 +36,17 @@ var Main = function() {
 	context.arc(50,50,50,0,Math.PI * 2);
 	context.fill();
 	QuickSettings.create(250,10,"Panel 2").addDropDown("DropDown",["one","two","three"],function(value6) {
-		_gthis.panel4.setText("Output","DropDown" + ": " + Std.string(value6.value));
+		_gthis.panel4.setValue("Output","DropDown" + ": " + Std.string(value6.value));
 	}).addImage("Image","boyhowdy.jpg").addProgressBar("ProgressBar",100,50).addElement("Element (canvas)",canvas);
 	QuickSettings.create(490,10,"Panel3").addHTML("HTML","<b>bold</b> <u>underline</u> <i>italic</i><ol><li>one</li><li>two</li><li>three</li>").addPassword("Password","12345678",function(value7) {
-		_gthis.panel4.setText("Output","Password" + ": " + (value7 == null?"null":"" + value7));
+		_gthis.panel4.setValue("Output","Password" + ": " + (value7 == null?"null":"" + value7));
 	}).addDate("Date","2016-07-11",function(value8) {
-		_gthis.panel4.setText("Output","Date" + ": " + (value8 == null?"null":"" + value8));
+		_gthis.panel4.setValue("Output","Date" + ": " + (value8 == null?"null":"" + value8));
 	}).addTime("Time","06:03:25",function(value9) {
-		_gthis.panel4.setText("Output","Time" + ": " + (value9 == null?"null":"" + value9));
+		_gthis.panel4.setValue("Output","Time" + ": " + (value9 == null?"null":"" + value9));
 	});
 	this.panel4 = QuickSettings.create(730,10,"Output Panel").addTextArea("Output");
 	this.panel5 = QuickSettings.create(730,200).addFileChooser("file chooser","pick an image...","image/*",$bind(this,this.onFileChosen)).addTextArea("file info","").setTextAreaRows("file info",10).addImage("image","");
-	QuickSettings.parse("{\n\t\t\t\"title\": \"Live Parse Demo\",\n\t\t\t\"x\": 490,\n\t\t\t\"y\": 350,\n\t\t\t\"draggable\": true,\n\t\t\t\"collapsible\": true,\n\t\t\t\"snapToGrid\": true,\n\t\t\t\"gridSize\": 10,\n\t\t\t\"controls\": [{\n\t\t\t\t\"type\": \"range\",\n\t\t\t\t\"title\": \"range test\",\n\t\t\t\t\"min\": 0,\n\t\t\t\t\"max\": 100,\n\t\t\t\t\"value\": 50,\n\t\t\t\t\"step\": 1\n\t\t\t},{\n\t\t\t\t\"type\": \"textarea\",\n\t\t\t\t\"title\": \"text area test\",\n\t\t\t\t\"value\": \"just some text\"\n\t\t\t},{\n\t\t\t\t\"type\": \"boolean\",\n\t\t\t\t\"title\": \"boolean test\",\n\t\t\t\t\"value\": true\n\t\t\t}]\n\t\t}");
 	QuickSettings.create(970,10,"HTML demo").addHTML("info","Since all the previous demos were canvas-based, I just wanted to show that there's no dependency on canvas here.").addHTML("info2","Most of this is done through direct binding on the HTML objects.").addHTML("info3","The fontSize control needs a callback because we have to add a unit (px or whatever)").bindText("title",window.document.title,window.document).bindColor("backgroundColor","#ffffff",window.document.body.style).bindText("innerHTML","Hello world",window.document.getElementsByTagName("h1")[0]).bindDropDown("fontFamily",["serif","sans-serif","monospace","cursive"],window.document.body.style).addRange("fontSize",1,40,16,1,function(value10) {
 		window.document.getElementsByTagName("p")[0].style.fontSize = value10 + "px";
 	});
@@ -61,8 +60,8 @@ Main.main = function() {
 Main.prototype = {
 	onFileChosen: function(file) {
 		window.console.log(file);
-		this.panel5.setText("file info","name: " + file.name + "\n\nsize: " + file.size + " bytes\n\ndate: " + Std.string(file.lastModifiedDate) + "\n\ntype: " + file.type);
-		this.panel5.setImageURL("image",URL.createObjectURL(file));
+		this.panel5.setValue("file info","name: " + file.name + "\n\nsize: " + file.size + " bytes\n\ndate: " + Std.string(file.lastModifiedDate) + "\n\ntype: " + file.type);
+		this.panel5.setValue("image",URL.createObjectURL(file));
 	}
 };
 Math.__name__ = true;
