@@ -153,7 +153,11 @@ extern class QuickSettings
 	public function clearLocalStorage (name:String):QuickSettings;
 
 
-	// [mck] have no idea how to fix this
+	/**
+		This is the new getter/setter for QuickSettings (version 3). 
+		For Haxe this will work, but it's not "the Haxe way".
+		We could just use the deprecated getter/setters from QuickSettings version < 3 (below)
+	**/
 	public function setValue(title:String,value:Dynamic):Dynamic;
 	public function getValue(title:String):Dynamic;
 
