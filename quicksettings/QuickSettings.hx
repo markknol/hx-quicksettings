@@ -102,15 +102,7 @@ extern class QuickSettings
 	/**
 		creates a button
 	**/
-	public function addButton(title:String, callback:Void->Void):QuickSettings;
-
-	/**
-		creates informational text:String
-		deprecated. Identical to addHTML
-	**/
-		// [mck] removed in version 3.0
-	// @:deprecated("addInfo is deprecated, use addHTML instead")
-	// public function addInfo(title:String, text:String):QuickSettings;
+	public function addButton(title:String, callback:js.html.MouseEvent->Void):QuickSettings;
 
 	/**
 		creates a dropdown list
