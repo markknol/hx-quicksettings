@@ -87,7 +87,7 @@ extern class QuickSettings
 	/**
 		creates a checkbox
 	**/
-	public function addBoolean(title:String, value:Bool, callback:Bool->Void):QuickSettings;
+	public function addBoolean(title:String, value:Bool, ?callback:Bool->Void):QuickSettings;
 
 	/**
 		creates an input text:String field
@@ -102,7 +102,7 @@ extern class QuickSettings
 	/**
 		creates a button
 	**/
-	public function addButton(title:String, callback:js.html.MouseEvent->Void):QuickSettings;
+	public function addButton(title:String, callback:EitherType<js.html.MouseEvent,Void>->Void):QuickSettings;
 
 	/**
 		creates a dropdown list
@@ -155,7 +155,7 @@ extern class QuickSettings
 
 	// [mck] have no idea how to fix this
 	public function setValue(title:String,value:Dynamic):Dynamic;
-	public function getValue(title:String):Void;
+	public function getValue(title:String):Dynamic;
 
 	// [mck] removed in version 3.0
 	// @:deprecated public function getInfo(title:String):String; // use getHTML instead
