@@ -27,15 +27,6 @@ extern class QuickSettings
 	public static function create(x:Float, y:Float, ?title:String, ?parent:Element):QuickSettings;
 
 	/**
-		Creates a new QuickSettings Panel from a JSON string or object.
-		@param json {Object|String} The JSON string or object to parse.
-		@param parent {HTMLElement} The parent element to attach the new panel to.
-		@param scope {Object} The object to look for any callbacks on.
-	**/
-	// [mck] removed in version 3.0
-	// public static function parse(json:EitherType<QSettings, String>, ?parent:Element, ?scope:Dynamic):QuickSettings;
-
-	/**
 		Destroys the panel, removing it from the document and nulling all properties.
 	**/
 	public function destroy():Void;
@@ -48,7 +39,6 @@ extern class QuickSettings
 	/**
 		Adds a date input. `date` String must be formatted like "YYYY-MM-DD". Or use a JS Date object
 	**/
-	// @:overload(function(title:String, date:Dynamic,callback:Dynamic->Void):QuickSettings{})
 	public function addDate(title:String, date:EitherType<String, Date>, callback:String->Void):QuickSettings;
 
 	/**
@@ -57,7 +47,6 @@ extern class QuickSettings
 		@param time {String|Date} A string in the format "HH:MM", "HH:MM:SS" or a Date object.
 		@param callback {Function} Callback function that will be called when the value of this control changes.
 	**/
-	// @:overload(function(title:String, time:Dynamic,callback:Dynamic->Void):QuickSettings{})
 	public function addTime(title:String, time:EitherType<String, Date>, callback:String->Void):QuickSettings;
 
 	/**
@@ -72,7 +61,12 @@ extern class QuickSettings
 	public function addNumber<T:Float>(title:String, min:T, max:T, value:T, step:T, callback:T->Void):QuickSettings;
 
 	/**
-		creates a color input. `color` can be "#f00", "#ff0000", "red", "rgb(255, 0, 0)", "rgba(255, 0, 0, 1)".
+		Adds a color picker control. In some browsers this will just render as a text input field, but should still retain all other functionality.
+		`color` can be "#f00", "#ff0000", "red", "rgb(255, 0, 0)", "rgba(255, 0, 0, 1)".
+		@param title {String} The title of this control.
+		@param color {String} The initial color value for this control.
+		@param callback {Function} Callback that will be called when the value of this control changes.
+		@returns {module:QuickSettings}
 	**/
 	public function addColor(title:String, color:String, callback:String->Void):QuickSettings;
 
@@ -100,7 +94,10 @@ extern class QuickSettings
 	public function addTextArea(title:String, ?text:String, ?callback:String->Void):QuickSettings;
 
 	/**
-		creates a button
+		Adds a button to the panel.
+		@param title {String} The title of the control.
+		@param callback {Function} Callback function to be called when the button is clicked.
+		@returns {module:QuickSettings}
 	**/
 	public function addButton(title:String, callback:EitherType<js.html.MouseEvent,Void>->Void):QuickSettings;
 
@@ -129,7 +126,6 @@ extern class QuickSettings
 		@param callback {Function} Callback function that will be called when a file is chosen.
 	**/
 	public function addFileChooser(title:String, labelStr:String, filter:String, callback:js.html.File->Void):QuickSettings;
-	// public function addFileChooser(title:String, labelStr:String, filter:String, callback:OnFileChosen->Void):Void;
 
 	/**
 		adds any arbitrary HTML element to the panel
@@ -152,46 +148,15 @@ extern class QuickSettings
     **/
 	public function clearLocalStorage (name:String):QuickSettings;
 
-
 	/**
-		This is the new getter/setter for QuickSettings (version 3). 
-		For Haxe this will work, but it's not "the Haxe way".
-		We could just use the deprecated getter/setters from QuickSettings version < 3 (below)
+		Sets value of the control with the given title.
 	**/
-	public function setValue(title:String,value:Dynamic):Dynamic;
+	public function setValue(title:String,value:Dynamic):QuickSettings;
+	
+	/**
+		Gets value of the control with the given title.
+	**/
 	public function getValue(title:String):Dynamic;
-
-	// [mck] removed in version 3.0
-	// @:deprecated public function getInfo(title:String):String; // use getHTML instead
-	// public function getTime(title:String):String;
-	// public function getNumber<T:Float>(title:String):T;
-	// public function getRangeValue<T:Float>(title:String):T;
-	// public function getBoolean(title:String):Bool;
-	// public function getColor(title:String):String;
-	// public function getText(title:String):String;
-	// public function getDate(title:String):String;
-	// public function getHTML(title:String):String;
-	// public function getFile(title:String):String;
-	// public function getDropDownValue<T>(title:String):T;
-	// public function getProgressValue<T:Float>(title:String):T;
-	// public function getNumberValue<T:Float>(title:String):T;
-	// public function getValuesAsJSON(asString:String):String;
-
-	// [mck] removed in version 3.0
-	// @:deprecated public function setInfo(title:String, text:String):QuickSettings; // use getHTML instead
-	// public function setTime(title:String, time:String):QuickSettings;
-	// public function setDate(title:String, date:String):QuickSettings;
-	// public function setRangeValue(title:String, value:Float):QuickSettings;
-	// public function setRangeParameters<T:Float>(title:String, min:T, max:T, step:T):QuickSettings;
-	// public function setNumberParameters<T:Float>(title:String, min:T, max:T, step:T):QuickSettings;
-	// public function setBoolean(title:String, value:Bool):QuickSettings;
-	// public function setColor(title:String, color:String):QuickSettings;
-	// public function setText(title:String, text:String):QuickSettings;
-	// public function setDropDownIndex(title:String, index:Int):QuickSettings;
-	// public function setImageURL(title:String, imageURL:String):QuickSettings;
-	// public function setProgressValue<T:Float>(title:String, value:T):QuickSettings;
-	// public function setNumberValue<T:Float>(title:String, value:T):QuickSettings;
-	// public function setHTML(title:String, html:String):Void;
 
 	/**
 		Set the number of rows in a text area (defaults to 5).
@@ -292,18 +257,6 @@ extern class QuickSettings
 	public function hideControl(name:String):QuickSettings;
 
 	/**
-		Enable/disable snapping controls to a grid
-	**/
-	// [mck] removed in version 3.0
-	// public function setSnapToGrid(enabled:Bool):QuickSettings;
-
-	/**
-		Set grid snap size
-	**/
-	// [mck] removed in version 3.0
-	// public function setGridSize(size:Float):QuickSettings;
-
-	/**
 		Toggle visibility state QuickSettings panel
 	**/
 	public function toggleVisibility():QuickSettings;
@@ -342,7 +295,6 @@ extern class QuickSettings
 		Global change handler. This callback will be called whenever any change is made to any control in this panel.
 	**/
 	public function setGlobalChangeHandler(callback:Dynamic->Dynamic):QuickSettings;
-	// public function setGlobalChangeHandler(callback:Dynamic->Void):Void;
 
 	public function bindRange<T:Float>(property:String, min:T, max:T, value:T, step:Float, object:Dynamic):QuickSettings;
 	public function bindColor(property:String, color:String, object:Dynamic):QuickSettings;

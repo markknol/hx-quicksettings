@@ -4,7 +4,7 @@
 
  > QuickSettings is a JavaScript library for making a quick settings panel to control code parameters.
 
-Current Haxe Extern QuickSetting version **2.2.1**
+Current Haxe Extern QuickSetting version **3.0**
 
 ![](panels.png)
 
@@ -13,10 +13,8 @@ Current Haxe Extern QuickSetting version **2.2.1**
 Add CDN hosted javascript to your HTML file. It's included with the default [quicksettings.css](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings.min.css) so no need to add that.
 
 ```html
-<!-- current quicksettings externs 2.2.1 -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/quicksettings/2.2.1/quicksettings.min.js"></script>
-<!-- latest quicksettings version is 3 and we need to address that -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/quicksettings/latest/quicksettings.min.js"></script>
+<!-- quicksettings version 3.0 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/quicksettings/3.0/quicksettings.min.js"></script>
 ```
 
 If you want to use a custom css, download and add the .[js](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings.js) and one of the following [quicksettings_black.min.css](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings_black.min.css) / [quicksettings_tiny.min.css](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings_tiny.min.css) / [quicksettings_tiny_black.min.css](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings_tiny_black.min.css) / [quicksettings_tiny_white.min.css](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings_tiny_white.min.css) / [quicksettings_white.min.css](https://raw.githubusercontent.com/bit101/quicksettings/master/quicksettings_white.min.css) files in your HTML file.

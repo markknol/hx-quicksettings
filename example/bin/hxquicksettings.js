@@ -24,9 +24,9 @@ var Main = function() {
 		_gthis.panel4.setValue("Output","Text" + ": " + (value4 == null?"null":"" + value4));
 	}).addTextArea("TextArea","a whole bunch of text can go here",function(value5) {
 		_gthis.panel4.setValue("Output","TextArea" + ": " + (value5 == null?"null":"" + value5));
-	}).addButton("Button",function() {
+	}).addButton("Button",function(value6) {
 		_gthis.panel4.setValue("Output","Button" + ": " + "clicked");
-	}).addHTML("Info","Info. This is a description...").setKey("s").saveInLocalStorage("localstoragedemo");
+	}).addHTML("Info","Info. This is a description...").setKey("s").saveInLocalStorage("localstoragedemo_v3.0");
 	var canvas = window.document.createElement("canvas");
 	canvas.width = 100;
 	canvas.height = 100;
@@ -35,20 +35,20 @@ var Main = function() {
 	context.fillStyle = "red";
 	context.arc(50,50,50,0,Math.PI * 2);
 	context.fill();
-	QuickSettings.create(250,10,"Panel 2").addDropDown("DropDown",["one","two","three"],function(value6) {
-		_gthis.panel4.setValue("Output","DropDown" + ": " + Std.string(value6.value));
+	QuickSettings.create(250,10,"Panel 2").addDropDown("DropDown",["one","two","three"],function(value7) {
+		_gthis.panel4.setValue("Output","DropDown" + ": " + Std.string(value7.value));
 	}).addImage("Image","boyhowdy.jpg").addProgressBar("ProgressBar",100,50).addElement("Element (canvas)",canvas);
-	QuickSettings.create(490,10,"Panel3").addHTML("HTML","<b>bold</b> <u>underline</u> <i>italic</i><ol><li>one</li><li>two</li><li>three</li>").addPassword("Password","12345678",function(value7) {
-		_gthis.panel4.setValue("Output","Password" + ": " + (value7 == null?"null":"" + value7));
-	}).addDate("Date","2016-07-11",function(value8) {
-		_gthis.panel4.setValue("Output","Date" + ": " + (value8 == null?"null":"" + value8));
-	}).addTime("Time","06:03:25",function(value9) {
-		_gthis.panel4.setValue("Output","Time" + ": " + (value9 == null?"null":"" + value9));
+	QuickSettings.create(490,10,"Panel3").addHTML("HTML","<b>bold</b> <u>underline</u> <i>italic</i><ol><li>one</li><li>two</li><li>three</li>").addPassword("Password","12345678",function(value8) {
+		_gthis.panel4.setValue("Output","Password" + ": " + (value8 == null?"null":"" + value8));
+	}).addDate("Date","2016-07-11",function(value9) {
+		_gthis.panel4.setValue("Output","Date" + ": " + (value9 == null?"null":"" + value9));
+	}).addTime("Time","06:03:25",function(value10) {
+		_gthis.panel4.setValue("Output","Time" + ": " + (value10 == null?"null":"" + value10));
 	});
 	this.panel4 = QuickSettings.create(730,10,"Output Panel").addTextArea("Output");
 	this.panel5 = QuickSettings.create(730,200).addFileChooser("file chooser","pick an image...","image/*",$bind(this,this.onFileChosen)).addTextArea("file info","").setTextAreaRows("file info",10).addImage("image","");
-	QuickSettings.create(970,10,"HTML demo").addHTML("info","Since all the previous demos were canvas-based, I just wanted to show that there's no dependency on canvas here.").addHTML("info2","Most of this is done through direct binding on the HTML objects.").addHTML("info3","The fontSize control needs a callback because we have to add a unit (px or whatever)").bindText("title",window.document.title,window.document).bindColor("backgroundColor","#ffffff",window.document.body.style).bindText("innerHTML","Hello world",window.document.getElementsByTagName("h1")[0]).bindDropDown("fontFamily",["serif","sans-serif","monospace","cursive"],window.document.body.style).addRange("fontSize",1,40,16,1,function(value10) {
-		window.document.getElementsByTagName("p")[0].style.fontSize = value10 + "px";
+	QuickSettings.create(970,10,"HTML demo").addHTML("info","Since all the previous demos were canvas-based, I just wanted to show that there's no dependency on canvas here.").addHTML("info2","Most of this is done through direct binding on the HTML objects.").addHTML("info3","The fontSize control needs a callback because we have to add a unit (px or whatever)").bindText("title",window.document.title,window.document).bindColor("backgroundColor","#ffffff",window.document.body.style).bindText("innerHTML","Hello world",window.document.getElementsByTagName("h1")[0]).bindDropDown("fontFamily",["serif","sans-serif","monospace","cursive"],window.document.body.style).addRange("fontSize",1,40,16,1,function(value11) {
+		window.document.getElementsByTagName("p")[0].style.fontSize = value11 + "px";
 	});
 };
 Main.__name__ = true;
