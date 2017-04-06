@@ -10,7 +10,7 @@ import haxe.extern.EitherType;
 
 	@website: <https://github.com/bit101/quicksettings>
 	@licence: MIT
-	@version: 3.0
+	@version: 3.0.2
 **/
 @:native("QuickSettings")
 extern class QuickSettings
@@ -152,7 +152,7 @@ extern class QuickSettings
 		Sets value of the control with the given title.
 	**/
 	public function setValue(title:String,value:Dynamic):QuickSettings;
-	
+
 	/**
 		Gets value of the control with the given title.
 	**/
