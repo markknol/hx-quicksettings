@@ -2,7 +2,7 @@ language: haxe
 
 haxe:
   - "3.2.1"
-  - development
+  - "3.4.0"
 
 hxml:
   - build.hxml
