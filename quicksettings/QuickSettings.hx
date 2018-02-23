@@ -104,7 +104,7 @@ extern class QuickSettings
 	/**
 		creates a dropdown list
 	**/
-	public function addDropDown<T>(title:String, items:Array<T>, callback: {index:Int, value:String}->Void):QuickSettings;
+	public function addDropDown<T>(title:String, items:Array<T>, callback: {index:Int, value:T}->Void):QuickSettings;
 
 	/**
 		creates and image element with the specified URL
