@@ -6,7 +6,7 @@
 
 Current Haxe Extern QuickSetting version **3.0.2**
 
-![](panels.png)
+![](https://raw.githubusercontent.com/markknol/hx-quicksettings/master/panels.png)
 
 ## Normal usage
 
@@ -28,24 +28,18 @@ If you want to use a custom css, download and add the .[js](https://raw.githubus
 ```
 
 
-# haxelib local use
+# Installation
 
-Currently there is no haxelib, but you can use this git repos as a development directory:
-
-```bash
-haxelib dev hxquicksettings path/to/folder
-```
-
-or use git directly
+Install using [haxelib](https://lib.haxe.org/p/quicksettings):
 
 ```bash
-haxelib git hxquicksettings https://github.com/markknol/hx-quicksettings.git
+haxelib install quicksettings
 ```
 
-don't forget to add it to your build file
+Don't forget to add the library to your build file:
 
 ```haxe
--lib hxquicksettings
+-lib quicksettings
 ```
 ## Usage in Haxe
 
