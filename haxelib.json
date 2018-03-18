@@ -1,0 +1,10 @@
+{
+  "name": "quicksettings",
+  "url" : "https://github.com/markknol/hx-quicksettings/",
+  "license": "MIT",
+  "tags": ["js", "haxe", "extern"],
+  "description": "Haxe extern classes for QuickSettings",
+  "version": "3.0.2",
+  "releasenote": "",
+  "contributors": ["markknol"]
+}
