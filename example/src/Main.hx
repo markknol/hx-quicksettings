@@ -10,15 +10,13 @@ import js.html.CanvasElement;
 /**
  * @author Matthijs Kamstra aka[mck]
  */
-class Main
-{
+class Main {
 	static function main () document.addEventListener("DOMContentLoaded", function(e) new Main());
 
 	var panel4:QuickSettings;
 	var panel5:QuickSettings;
 
-	public function new ()
-	{
+	public function new () {
 		// demo/basic example
 		var panel1 = QuickSettings.create(10, 10, "Panel 1")
 			.addRange("Range", 0, 100, 30, 1, function(value) output("Range", value))
@@ -80,15 +78,13 @@ class Main
 		settings.addRange("fontSize", 1, 40, 16, 1, function(value) document.getElementsByTagName("p")[0].style.fontSize = value + "px");
 	}
 
-	inline function output<T>(name:String, value:T)
-	{
+	inline function output<T>(name:String, value:T) {
 		panel4.setValue("Output", '$name: $value');
 	}
 
-	function onFileChosen(file:js.html.File)
-	{
+	function onFileChosen(file:js.html.File) {
 		Browser.console.log(file);
-		panel5.setValue("file info", 'name: ${file.name}\n\nsize: ${file.size} bytes\n\ndate: ${file.lastModifiedDate}\n\ntype: ${file.type}');
+		panel5.setValue("file info", 'name: ${file.name}\n\nsize: ${file.size} bytes\n\ntype: ${file.type}');
 		panel5.setValue("image", js.html.URL.createObjectURL(file));
 	}
 }
