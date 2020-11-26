@@ -52,7 +52,7 @@ var settings:QuickSettings = QuickSettings.create(20, 20, "Settings");
 
 Check out the [example](https://github.com/markknol/hx-quicksettings/blob/master/example/src/Main.hx) folder for more information.
 
-Or see it in action [here](http://htmlpreview.github.io/?https://github.com/markknol/hx-quicksettings/blob/master/example/bin/index.html)
+Or see it in action [here](http://markknol.github.io/hx-quicksettings/example/bin/index.html)
 
 **Enjoy!**
 
